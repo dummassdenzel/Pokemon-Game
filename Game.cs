@@ -4,7 +4,8 @@ namespace PokemonGame
 
     class Game
     {
-
+        
+        public static System.Timers.Timer dialogueTimer;
         public static void showAllActions()
         {
             Console.WriteLine("\nEnter the phrase or the number:");
@@ -26,6 +27,10 @@ namespace PokemonGame
             Trainer.ActivePokemon[0] = Trainer.ActivePokemon[1];
             Trainer.ActivePokemon[1] = pokemonSwitcher;
         }
+
+        public static async Task Wait(){
+            await Task.Delay(5000);
+        }        
 
 
 

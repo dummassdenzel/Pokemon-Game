@@ -60,7 +60,7 @@ namespace PokemonGame
             while (isCatchable == false)
             {
                 Console.Write($"{trainerName} - Choose Pokemon to catch: ");
-                string chosenPokemon = Console.ReadLine();
+                string? chosenPokemon = Console.ReadLine();
 
 
 
@@ -149,7 +149,7 @@ namespace PokemonGame
             while (playerExists == false)
             {
                 Console.Write($"{trainerName} - Enter a Trainer to duel with: ");
-                string duelledTrainer = Console.ReadLine();
+                string? duelledTrainer = Console.ReadLine();
                 //Checks if the specified player exists
                 for (int i = 0; i < Players.Count; i++)
                 {
@@ -336,7 +336,7 @@ namespace PokemonGame
                             //Actual Move Selection:
                             //--------------------------------------------------------------------------------------------------//
                             Console.Write("Enter the Move you want to use: ");
-                            string specifiedMove = Console.ReadLine();
+                            string? specifiedMove = Console.ReadLine();
 
                             //NOTE TO SELF: If you find yourself using this method of making moves, compute the moveDamage with
                             // "moveDamage * Trainer.ActivePokemon[0].atk) / 100;" in Battle

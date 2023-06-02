@@ -14,14 +14,20 @@ public class ActualGame
         Types.InitializeWeaknesses();
         Console.Beep();
         Trainer.StartJourney();
-
+        Trainer Denzel = new Trainer("Denzel", "m");
+        Trainer Adrian = new Trainer("Adrian", "m");
+        Trainer Dominic = new Trainer("Dominic", "m");
+        Trainer Shawn = new Trainer("Shawn", "m");
+        Trainer Vince = new Trainer("Vince", "m");
+        Trainer Iverson = new Trainer("Iverson", "m");        
+        Console.Clear();
 
         bool charcreation = true;
         while (charcreation == true)
         {
             Console.WriteLine("-Would you like to create your own character? (y/n): ");
             Console.Write("-");
-            string createchar = Console.ReadLine();
+            string? createchar = Console.ReadLine();
             if (createchar.ToLower().Contains("yes"))
             {
                 Console.Beep();
@@ -35,7 +41,7 @@ public class ActualGame
                 {
                     Console.WriteLine("\nFirst off, trainer, are you a boy or a girl? (m/f): ");
                     Console.Write("-");
-                    string boyorgirl = Console.ReadLine();
+                    string? boyorgirl = Console.ReadLine();
                     switch (boyorgirl.ToLower())
                     {
                         case "m" or "male" or "boy":
@@ -59,12 +65,30 @@ public class ActualGame
                             continue;
 
                     }
-                    bool entername = true;
+                    bool entername = true;                    
                     while (entername == true)
                     {
                         Console.WriteLine("Well then, Can I have your name, trainer?: ");
                         Console.Write("-");
                         newcharname = Console.ReadLine();
+                        bool alreadyExists = false;
+                        for (int i = 0; i < Trainer.Players.Count; i++)
+                        {
+                            
+                            if (newcharname.ToLower() == Trainer.Players[i].trainerName.ToLower())
+                            {
+                                
+                                Console.WriteLine("\nSorry, that trainer already exists.\n");
+                                alreadyExists = true;
+                                
+                            }
+                            
+                        }
+                        
+                        if (alreadyExists == true)
+                        {
+                            continue;
+                        }
 
                         if (newcharname.ToLower().Contains("gay") || newcharname.ToLower().Contains("shit") || newcharname.ToLower().Contains("fuck") || newcharname.ToLower().Contains("tangina"))
                         {
@@ -72,10 +96,12 @@ public class ActualGame
                             continue;
                         }
 
-                        Console.Clear();
+                        // Console.Clear();
                         Trainer newTrainer = new Trainer(newcharname, newchargender);
+                        alreadyExists = false;
                         entername = false;
                         break;
+
                     }
                     charcreation = false;
                 }
@@ -96,12 +122,7 @@ public class ActualGame
         }
 
 
-        Trainer Denzel = new Trainer("Denzel", "m");
-        Trainer Adrian = new Trainer("Adrian", "m");
-        Trainer Dominic = new Trainer("Dominic", "m");
-        Trainer Shawn = new Trainer("Shawn", "m");
-        Trainer Vince = new Trainer("Vince", "m");
-        Trainer Iverson = new Trainer("Iverson", "m");
+        
         Console.WriteLine("---------------------------------------------------------------------------\n");
         Console.Beep();
 
@@ -114,7 +135,7 @@ public class ActualGame
             {
                 Trainer.ShowAllTrainers();
                 Console.Write("\nWho do you wish to play as?: ");
-                string playerName = Console.ReadLine();
+                string? playerName = Console.ReadLine();
                 for (int i = 0; i < Trainer.Players.Count; i++)
                 {
                     if (playerName.ToLower() == Trainer.Players[i].trainerName.ToLower())
@@ -138,7 +159,7 @@ public class ActualGame
             while (SwitchTrainer == false)
             {
                 Console.Write($"What do you want to do, {currentPlayer[0].trainerName}?: ");
-                string whatDoYouWannaDo = Console.ReadLine();
+                string? whatDoYouWannaDo = Console.ReadLine();
                 switch (whatDoYouWannaDo.ToLower())
                 {
 
@@ -152,7 +173,7 @@ public class ActualGame
                     //Challenge a Trainer
                     case "challenge a trainer" or "2":
                         if (currentPlayer[0].team.Count != 0)
-                        {   
+                        {
                             Console.Clear();
                             Trainer.ShowAllTrainers();
                             currentPlayer[0].Challenge();
