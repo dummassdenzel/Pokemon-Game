@@ -84,19 +84,24 @@ namespace PokemonGame
         // Electric Type Pokemon
         public static Pokemon Pikachu = new Pokemon("Pikachu", 19, 11, 11, 21, Types.Electric, Types.none);
         public static Pokemon Jolteon = new Pokemon("Jolteon", 22, 15, 14, 19, Types.Electric, Types.none);
+        public static Pokemon Luxray = new Pokemon("Luxray", 24, 18, 13, 13, Types.Electric, Types.none);
 
 
         // Psychic Type Pokemon
         public static Pokemon Alakazam = new Pokemon("Alakazam", 22, 20, 14, 18, Types.Psychic, Types.none);
         public static Pokemon Gardevoir = new Pokemon("Gardevoir", 23, 19, 15, 14, Types.Psychic, Types.Fairy);
+        public static Pokemon Gallade = new Pokemon("Gallade", 22, 18, 15, 14, Types.Psychic, Types.Fighting);
         public static Pokemon Espeon = new Pokemon("Espeon", 22, 19, 14, 17, Types.Psychic, Types.none);
+
 
         // Fighting Type Pokemon     
         public static Pokemon Lucario = new Pokemon("Lucario", 23, 17, 13, 15, Types.Fighting, Types.Steel);
+        public static Pokemon Machamp = new Pokemon("Machamp", 25, 19, 14, 12, Types.Fighting, Types.none);
 
 
         // Normal Type Pokemon
         public static Pokemon Snorlax = new Pokemon("Snorlax", 32, 17, 15, 9, Types.Normal, Types.none);
+        public static Pokemon Eevee = new Pokemon("Eevee", 21, 11, 12, 11, Types.Normal, Types.none);
 
 
         // Ghost Type Pokemon
@@ -117,6 +122,7 @@ namespace PokemonGame
 
         // Ground Type Pokemon
         public static Pokemon Krookodile = new Pokemon("Krookodile", 26, 18, 14, 15, Types.Ground, Types.Dark);
+        public static Pokemon Golurk = new Pokemon("Golurk", 24, 18, 14, 11, Types.Ground, Types.Ghost);
 
 
         // Steel Type Pokemon
@@ -130,6 +136,8 @@ namespace PokemonGame
         //Flying Type Pokemon
         public static Pokemon Staraptor = new Pokemon("Staraptor", 24, 18, 13, 16, Types.Flying, Types.Normal);
 
+        //Fairy Type Pokemon
+        public static Pokemon Sylveon = new Pokemon("Sylveon", 25, 17, 14, 12, Types.Fairy, Types.none);
 
 
         //*POKEMON MOVES SYSTEM*
@@ -146,11 +154,14 @@ namespace PokemonGame
             Charizard.LearnMove(Move.Flamethrower);
             Charizard.LearnMove(Move.Fly);
             Charizard.LearnMove(Move.DragonClaw);
+            Blaziken.LearnMove(Move.CloseCombat);
+            Blaziken.LearnMove(Move.Flamethrower);
             Ninetales.LearnMove(Move.Flamethrower);
             Ninetales.LearnMove(Move.FireFang);
             Arcanine.LearnMove(Move.Flamethrower);
             Arcanine.LearnMove(Move.FireFang);
             Flareon.LearnMove(Move.Flamethrower);
+            Flareon.LearnMove(Move.QuickAttack);
             //Water Type Pokemon
             Gyarados.LearnMove(Move.AquaTail);
             Gyarados.LearnMove(Move.Earthquake);
@@ -162,6 +173,7 @@ namespace PokemonGame
             Blastoise.LearnMove(Move.Crunch);
             Vaporeon.LearnMove(Move.AquaTail);
             Vaporeon.LearnMove(Move.Surf);
+            Vaporeon.LearnMove(Move.QuickAttack);
             Greninja.LearnMove(Move.Waterfall);
             Greninja.LearnMove(Move.Surf);
             Greninja.LearnMove(Move.DarkPulse);
@@ -169,10 +181,12 @@ namespace PokemonGame
             Venusaur.LearnMove(Move.PetalDance);
             Tsareena.LearnMove(Move.TropKick);
             Tsareena.LearnMove(Move.HighJumpKick);
+            Tsareena.LearnMove(Move.PlayRough);
             //Steel Type Pokemon
             Metagross.LearnMove(Move.Psychic);
             Metagross.LearnMove(Move.Earthquake);
             Metagross.LearnMove(Move.MeteorMash);
+            Metagross.LearnMove(Move.HammerArm);
             Aggron.LearnMove(Move.IronHead);
             Aggron.LearnMove(Move.Earthquake);
             Aggron.LearnMove(Move.StoneEdge);
@@ -183,39 +197,58 @@ namespace PokemonGame
             //Ground Type Pokemon
             Krookodile.LearnMove(Move.Crunch);
             Krookodile.LearnMove(Move.Earthquake);
+            Golurk.LearnMove(Move.Earthquake);
+            Golurk.LearnMove(Move.PhantomForce);
             //Ghost Type Pokemon
             Gengar.LearnMove(Move.Psychic);
             Gengar.LearnMove(Move.ShadowBall);
             Gengar.LearnMove(Move.DarkPulse);
             //Dark Type Pokemon
             Umbreon.LearnMove(Move.DarkPulse);
+            Umbreon.LearnMove(Move.QuickAttack);
             Zoroark.LearnMove(Move.DarkPulse);
             //Psychic Type Pokemon
             Gardevoir.LearnMove(Move.MoonBlast);
             Gardevoir.LearnMove(Move.Psychic);
             Gardevoir.LearnMove(Move.ShadowBall);
+            Gallade.LearnMove(Move.Psychic);
+            Gallade.LearnMove(Move.CloseCombat);
             Alakazam.LearnMove(Move.Psychic);
             Alakazam.LearnMove(Move.ShadowBall);
             Espeon.LearnMove(Move.Psychic);
+            Espeon.LearnMove(Move.QuickAttack);
             //Fighting Type Pokemon
-            Lucario.LearnMove(Move.CloseCombat);
-            Blaziken.LearnMove(Move.CloseCombat);
+            Lucario.LearnMove(Move.CloseCombat);     
+            Lucario.LearnMove(Move.IronHead);          
+            Machamp.LearnMove(Move.CloseCombat);
+            Machamp.LearnMove(Move.HammerArm);
+            Machamp.LearnMove(Move.StoneEdge);
             //Flying Type Pokemon
             Staraptor.LearnMove(Move.Fly);
             Staraptor.LearnMove(Move.BraveBird);
             Staraptor.LearnMove(Move.CloseCombat);
+            Staraptor.LearnMove(Move.QuickAttack);
             //Normal Type Pokemon
             Snorlax.LearnMove(Move.BodySlam);
             Snorlax.LearnMove(Move.Crunch);
+            Eevee.LearnMove(Move.QuickAttack);
+            Eevee.LearnMove(Move.PlayRough);
             //Electric Type Pokemon
             Pikachu.LearnMove(Move.Thunderbolt);
             Jolteon.LearnMove(Move.Thunderbolt);
+            Jolteon.LearnMove(Move.QuickAttack);
+            Luxray.LearnMove(Move.Thunderbolt);
+            Luxray.LearnMove(Move.Crunch);
             //Dragon Type Pokemon
             Garchomp.LearnMove(Move.DragonClaw);
             Garchomp.LearnMove(Move.Earthquake);
             Dragonite.LearnMove(Move.DragonClaw);
             Dragonite.LearnMove(Move.DragonPulse);
-            Dragonite.LearnMove(Move.Flamethrower);
+            Dragonite.LearnMove(Move.Fly);
+            //Fairy Type Pokemon
+            Sylveon.LearnMove(Move.PlayRough);
+            Sylveon.LearnMove(Move.MoonBlast);
+            Sylveon.LearnMove(Move.QuickAttack);
         }
 
 

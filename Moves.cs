@@ -44,6 +44,7 @@ namespace PokemonGame
 
         //Fairy Types Moves
         public static Move MoonBlast = new Move("Moonblast", 90, Types.Fairy);
+        public static Move PlayRough = new Move("Play Rough", 90, Types.Fairy);
 
         //Dark Types Moves
         public static Move Crunch = new Move("Crunch", 80, Types.Dark);
@@ -51,6 +52,7 @@ namespace PokemonGame
 
         //Ghost Types Moves
         public static Move ShadowBall = new Move("Shadow Ball", 80, Types.Ghost);
+        public static Move PhantomForce = new Move("Phantom Force", 90, Types.Ghost);
 
         //Ground Types Moves
         public static Move Earthquake = new Move("Earthquake", 100, Types.Ground);
@@ -69,9 +71,11 @@ namespace PokemonGame
         //Fighting Types Moves
         public static Move CloseCombat = new Move("Close Combat", 100, Types.Fighting);
         public static Move HighJumpKick = new Move("High Jump Kick", 85, Types.Fighting);
+        public static Move HammerArm = new Move("Hammer Arm", 100, Types.Fighting);
 
         //Normal Types Moves
         public static Move BodySlam = new Move("Body Slam", 85, Types.Normal);
+        public static Move QuickAttack = new Move("Quick Attack", 40, Types.Normal);
 
         //Rock Type Moves
         public static Move StoneEdge = new Move("Stone Edge", 100, Types.Rock);
