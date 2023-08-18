@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\J.A.R.V.I.S\\knowledge\\classes\\PokemonGame.csproj": {}
+    "C:\\Users\\J.A.R.V.I.S\\knowledge\\Classes\\PokemonGame.csproj": {}
   },
   "projects": {
-    "C:\\Users\\J.A.R.V.I.S\\knowledge\\classes\\PokemonGame.csproj": {
+    "C:\\Users\\J.A.R.V.I.S\\knowledge\\Classes\\PokemonGame.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\J.A.R.V.I.S\\knowledge\\classes\\PokemonGame.csproj",
+        "projectUniqueName": "C:\\Users\\J.A.R.V.I.S\\knowledge\\Classes\\PokemonGame.csproj",
         "projectName": "PokemonGame",
-        "projectPath": "C:\\Users\\J.A.R.V.I.S\\knowledge\\classes\\PokemonGame.csproj",
+        "projectPath": "C:\\Users\\J.A.R.V.I.S\\knowledge\\Classes\\PokemonGame.csproj",
         "packagesPath": "C:\\Users\\J.A.R.V.I.S\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\J.A.R.V.I.S\\knowledge\\classes\\obj\\",
+        "outputPath": "C:\\Users\\J.A.R.V.I.S\\knowledge\\Classes\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Users\\J.A.R.V.I.S\\AppData\\Roaming\\Godot\\mono\\GodotNuGetFallbackFolder",
@@ -62,7 +62,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.302\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.400\\RuntimeIdentifierGraph.json"
         }
       }
     }

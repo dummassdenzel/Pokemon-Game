@@ -3,7 +3,6 @@ C:\Users\J.A.R.V.I.S\knowledge\Classes\bin\Debug\net7.0\PokemonGame.deps.json
 C:\Users\J.A.R.V.I.S\knowledge\Classes\bin\Debug\net7.0\PokemonGame.runtimeconfig.json
 C:\Users\J.A.R.V.I.S\knowledge\Classes\bin\Debug\net7.0\PokemonGame.dll
 C:\Users\J.A.R.V.I.S\knowledge\Classes\bin\Debug\net7.0\PokemonGame.pdb
-C:\Users\J.A.R.V.I.S\knowledge\Classes\obj\Debug\net7.0\PokemonGame.csproj.AssemblyReference.cache
 C:\Users\J.A.R.V.I.S\knowledge\Classes\obj\Debug\net7.0\PokemonGame.GeneratedMSBuildEditorConfig.editorconfig
 C:\Users\J.A.R.V.I.S\knowledge\Classes\obj\Debug\net7.0\PokemonGame.AssemblyInfoInputs.cache
 C:\Users\J.A.R.V.I.S\knowledge\Classes\obj\Debug\net7.0\PokemonGame.AssemblyInfo.cs

@@ -4,42 +4,33 @@ namespace PokemonGame
     public class Pokemon
     {
         //Each individual Pokemon have these Attributes.
+
+        //STATS
         public string pokeName;
         public int hp;
+        public int combathp;
         public int atk;
         public int def;
         public int speed;
-        public string ownerTrainer = "none";
-        public int combathp;
         public Types poketype1;
         public Types poketype2;
+
+        //BATTLE
+        public string ownerTrainer = "none";
         public List<Move> LearnedMoves = new List<Move>();
-        public List<Pokemon> EvolutionStages = new List<Pokemon>();
+        public List<Move> LearnableMoves = new List<Move>();
         public int pokelevel = 5;
-        public int exp;
+
+        //MISC
+        public List<Pokemon> EvolutionStages = new List<Pokemon>();
+        public int expYield = 120;
+        // public int expYield;
 
 
-
-        //Arrays
-        public List<Action> Moveset = new List<Action>();
-        public static List<Pokemon> AllPokemon = new List<Pokemon>();
-
-
-
-
-        //Show All Catchable Pokemon
-        public static void ShowAllPokemon()
-        {
-            Console.WriteLine("\nList of all Catchable Pokemon: ");
-            foreach (var item in Pokemon.AllPokemon)
-            {
-                Console.WriteLine(item.pokeName);
-            }
-            Console.WriteLine();
-        }
 
 
         //POKEMON CONSTRUCTOR
+        // Name, HP, ATK, DEF, SPEED, TYPE1, TYPE2
         public Pokemon(string thisname, int thishp, int thisatk, int thisdef, int thisspeed, Types thistype1, Types thistype2)
         {
 
@@ -55,6 +46,24 @@ namespace PokemonGame
 
 
         }
+
+
+
+
+        //Arrays        
+        public static List<Pokemon> AllPokemon = new List<Pokemon>();
+
+        //Show All Catchable Pokemon
+        public static void ShowAllPokemon()
+        {
+            Console.WriteLine("\nList of all Catchable Pokemon: ");
+            foreach (var item in Pokemon.AllPokemon)
+            {
+                Console.WriteLine(item.pokeName);
+            }
+            Console.WriteLine();
+        }
+
 
 
         //LIST OF ALL EXISTING POKEMON
@@ -218,8 +227,8 @@ namespace PokemonGame
             Espeon.LearnMove(Move.Psychic);
             Espeon.LearnMove(Move.QuickAttack);
             //Fighting Type Pokemon
-            Lucario.LearnMove(Move.CloseCombat);     
-            Lucario.LearnMove(Move.IronHead);          
+            Lucario.LearnMove(Move.CloseCombat);
+            Lucario.LearnMove(Move.IronHead);
             Machamp.LearnMove(Move.CloseCombat);
             Machamp.LearnMove(Move.HammerArm);
             Machamp.LearnMove(Move.StoneEdge);
