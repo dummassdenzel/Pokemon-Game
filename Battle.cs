@@ -36,6 +36,9 @@ namespace PokemonGame{
             Console.WriteLine("---------------------------------------------------------------------------");
         }
 
+
+        //POKEMON BATTLE SYSTEM - by yours truly
+
         public static void PokemonBattle()
         {
             
@@ -147,7 +150,7 @@ namespace PokemonGame{
 
                             for (int i = 0; i < ActivePokemon[0].LearnedMoves.Count; i++)
                             {
-                                if (specifiedMove.ToLower() == ActivePokemon[0].LearnedMoves[i].moveName.ToLower())
+                                if (specifiedMove?.ToLower() == ActivePokemon[0].LearnedMoves[i].moveName.ToLower())
                                 {
 
                                     int movePower = ActivePokemon[0].LearnedMoves[i].moveDamage;
@@ -269,6 +272,7 @@ namespace PokemonGame{
                     else
                     {
                         Console.WriteLine($"*{ActivePokemon[0].pokeName} has been defeated!*");
+                        ActivePokemon[1].GainExp(ActivePokemon[0]);
                     }
 
                 }// <----  By the time this bracket ends, it means ChooseMove() has finished, and we're now back to the PokemonBattle() loop;

@@ -19,13 +19,29 @@ namespace PokemonGame
         public string ownerTrainer = "none";
         public List<Move> LearnedMoves = new List<Move>();
         public List<Move> LearnableMoves = new List<Move>();
-        public int pokelevel = 5;
 
-        //MISC
+
+        //LEVEL UP SYSTEM
         public List<Pokemon> EvolutionStages = new List<Pokemon>();
+        public int pokelevel = 5;
+        double totalExp;
+        public double expGained;
         public int expYield = 120;
-        // public int expYield;
+        public void GainExp(Pokemon pokemon)
+        {
+            int priorlevel = this.pokelevel;
 
+            expGained = ((pokemon.expYield * pokelevel) / 7) * 1.5;          
+            this.totalExp += (int)expGained;
+            Console.WriteLine($"{this.pokeName} gained {(int)expGained} Exp.");
+            
+            double expToLevel = Math.Floor(Math.Cbrt(this.totalExp));
+            pokelevel = (int)expToLevel;
+            if (priorlevel < pokelevel)
+            {
+                Console.WriteLine($"{this.pokeName} leveled up to Lv.{this.pokelevel}!");
+            }
+        }
 
 
 
@@ -42,6 +58,7 @@ namespace PokemonGame
             this.combathp = hp;
             this.poketype1 = thistype1;
             this.poketype2 = thistype2;
+            double totalExp = Math.Pow(pokelevel, 3);
             AllPokemon.Add(this);
 
 

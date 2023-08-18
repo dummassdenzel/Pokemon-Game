@@ -2,7 +2,8 @@
 using PokemonGame;
 
 public class ActualGame
-{
+{       
+        
     static void Main(string[] args)
     {
 
@@ -10,12 +11,9 @@ public class ActualGame
         Types.InitializeWeaknesses();
         Trainer.InitializeNPTrainers();
         Console.Beep();
-        Game.StartJourney();        
-        Console.Clear();
-        Game.CustomTrainerCreation();
 
-
-        Console.WriteLine("---------------------------------------------------------------------------\n");
+        Game.StartJourney();               
+        Game.CustomTrainerCreation();        
         Console.Beep();
 
         Game.StartGame();

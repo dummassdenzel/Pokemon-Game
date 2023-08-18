@@ -23,7 +23,7 @@ namespace PokemonGame
                     string? playerName = Console.ReadLine();
                     for (int i = 0; i < Trainer.Players.Count; i++)
                     {
-                        if (playerName.ToLower() == Trainer.Players[i].trainerName.ToLower())
+                        if (playerName?.ToLower() == Trainer.Players[i].trainerName.ToLower())
                         {
                             playerExists = true;
                             currentPlayer.Add(Trainer.Players[i]);
@@ -35,18 +35,20 @@ namespace PokemonGame
                     }
                     if (playerExists == false)
                     {
+                        Console.Clear();
                         Console.WriteLine("Please enter a valid trainer's name!");
                         continue;
                     }
                 }
 
-                Console.WriteLine("*Enter 'h' to show list of all possible actions.*");
                 bool mainMenu = true;
                 while (mainMenu == true)
                 {
+                    showAllActions();
+                    Console.WriteLine("---------------------------------------------------------------------------");
                     Console.Write($"What do you want to do, {currentPlayer[0].trainerName}?: ");
                     string? whatDoYouWannaDo = Console.ReadLine();
-                    switch (whatDoYouWannaDo.ToLower())
+                    switch (whatDoYouWannaDo?.ToLower())
                     {
 
                         //Catch a Pokemon
@@ -120,6 +122,7 @@ namespace PokemonGame
 
                         //No Match
                         default:
+                            Console.Clear();
                             Console.WriteLine("Please enter a valid action!");
                             continue;
                     }
@@ -143,99 +146,120 @@ namespace PokemonGame
         public static void CustomTrainerCreation()
         {
             bool charcreation = true;
-            while (charcreation == true)
+
+            while (charcreation)
             {
                 Console.WriteLine("-Would you like to create your own character? (y/n): ");
                 Console.Write("-");
                 string? createchar = Console.ReadLine();
-                if (createchar.ToLower().Contains("yes"))
+
+                if (createchar?.ToLower().Contains("yes") == true)
                 {
                     Console.Beep();
                     Console.WriteLine("\nUnderstood!\n");
 
-                    string newchargender;
-                    string newcharname;
 
+                    //Enter your Gender
+                    string? newchargender = null;
                     bool entergender = true;
-                    while (entergender == true)
+                    while (entergender)
                     {
                         Console.WriteLine("\nFirst off, trainer, are you a boy or a girl? (m/f): ");
                         Console.Write("-");
                         string? boyorgirl = Console.ReadLine();
-                        switch (boyorgirl.ToLower())
+
+                        switch (boyorgirl?.ToLower())
                         {
-                            case "m" or "male" or "boy":
+                            case "m":
+                            case "male":
+                            case "boy":
                                 Console.WriteLine("\nUnderstood!\n");
                                 newchargender = "m";
                                 entergender = false;
                                 break;
 
-                            case "f" or "female" or "girl":
+                            case "f":
+                            case "female":
+                            case "girl":
                                 Console.WriteLine("\nUnderstood!\n");
                                 newchargender = "f";
                                 entergender = false;
                                 break;
 
-                            case "g" or "gay" or "im gay" or "lesbian" or "bi" or "bisexual":
+                            case "g":
+                            case "gay":
+                            case "im gay":
+                            case "lesbian":
+                            case "bi":
+                            case "bisexual":
                                 Console.WriteLine("Sorry, please enter only your biological gender...");
                                 continue;
 
                             default:
                                 Console.WriteLine("Please answer the question properly.");
                                 continue;
-
                         }
-                        bool entername = true;
-                        while (entername == true)
+
+
+                        //Enter your Name
+                        string? newcharname = null;
+                        while (string.IsNullOrEmpty(newcharname))
                         {
                             Console.WriteLine("Well then, Can I have your name, trainer?: ");
                             Console.Write("-");
                             newcharname = Console.ReadLine();
                             bool alreadyExists = false;
-                            for (int i = 0; i < Trainer.Players.Count; i++)
+                            if (string.IsNullOrEmpty(newcharname))
+                            {
+                                Console.WriteLine("Please enter a valid name.\n");
+                            }
+                            else
                             {
 
-                                if (newcharname.ToLower() == Trainer.Players[i].trainerName.ToLower())
+
+                                for (int i = 0; i < Trainer.Players.Count; i++)
                                 {
-
-                                    Console.WriteLine("\nSorry, that trainer already exists.\n");
-                                    alreadyExists = true;
-
+                                    if (Trainer.Players[i] != null && newcharname != null &&
+                                        newcharname.ToLower() == Trainer.Players[i].trainerName?.ToLower())
+                                    {
+                                        Console.WriteLine("\nSorry, that trainer already exists.\n");
+                                        alreadyExists = true;
+                                        break;
+                                    }
+                                }
+                                if (alreadyExists == true)
+                                {
+                                    newcharname = ""; // Reset the name and continue the loop
+                                    continue;
                                 }
 
+                                if (newcharname?.ToLower().Contains("gay") == true ||
+                                    newcharname?.ToLower().Contains("shit") == true ||
+                                    newcharname?.ToLower().Contains("fuck") == true ||
+                                    newcharname?.ToLower().Contains("tangina") == true)
+                                {
+                                    Console.WriteLine("How rude! Please enter a proper name.\n");
+                                    newcharname = ""; // Reset the name and continue the loop
+                                    continue;
+                                }
                             }
-
-                            if (alreadyExists == true)
-                            {
-                                continue;
-                            }
-
-                            if (newcharname.ToLower().Contains("gay") || newcharname.ToLower().Contains("shit") || newcharname.ToLower().Contains("fuck") || newcharname.ToLower().Contains("tangina"))
-                            {
-                                Console.WriteLine("How rude! Please enter a proper name.\n");
-                                continue;
-                            }
-
-                            Console.Clear();
-                            Trainer newTrainer = new Trainer(newcharname, newchargender, true);
-                            alreadyExists = false;
-                            entername = false;
-                            break;
-
                         }
-
+                        Console.Clear();
+                        Trainer newTrainer = new Trainer(newcharname, newchargender, true);
                         charcreation = false;
-                        //End of Character Creation                
+                        break;
+                        //End of Character Creation : "Yes"
+
                     }
 
                 }
-                if (createchar.ToLower().Contains("no"))
+                if (createchar?.ToLower().Contains("no") == true)
                 {
                     Console.Clear();
-                    Console.WriteLine("Understood!\n");
+                    Console.WriteLine("Understood!");
                     charcreation = false;
                     break;
-                    //End of Character Creation  
+                    //End of Character Creation   : "No"
                 }
                 if (charcreation == true)
                 {
@@ -243,6 +267,7 @@ namespace PokemonGame
                     continue;
                 }
             }
+            Console.WriteLine("---------------------------------------------------------------------------\n");
         }
 
 
@@ -279,7 +304,6 @@ namespace PokemonGame
         //Show All Available Actions
         public static void showAllActions()
         {
-            Console.Clear();
             Console.WriteLine("\nEnter the phrase or the number:");
             Console.WriteLine("(1) - Catch a Pokemon");
             Console.WriteLine("(2) - Challenge a Trainer ");
@@ -291,33 +315,6 @@ namespace PokemonGame
             Console.WriteLine("(8) - End Game ");
             Console.WriteLine("*Enter 'none' if you wish to go back to choosing an Action.*\n");
         }
-
-
-
-
-
-
-
-
-        // public static async void Wait(){
-        //     Console.Write("Battle Starting");
-        //     await Task.Delay(1000);
-        //     Console.Write(".");
-        //     await Task.Delay(1000);
-        //     Console.Write(".");
-        //     await Task.Delay(1000);
-        //     Console.Write(".");
-        //     await Task.Delay(1000);
-        // }
-
-        // int expYield = 120;
-        // int level = 5;
-        // double expGained;
-
-        // expGained = ((64 * level)/7) * 1.5;
-        // Console.WriteLine((int)expGained);
-
-
 
 
 

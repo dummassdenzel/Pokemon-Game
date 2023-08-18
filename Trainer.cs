@@ -76,7 +76,7 @@ namespace PokemonGame
 
                 for (int i = 0; i < Pokemon.AllPokemon.Count; i++)
                 {
-                    if (Pokemon.AllPokemon[i].pokeName.ToLower() == chosenPokemon.ToLower() && Pokemon.AllPokemon[i].ownerTrainer == "none")
+                    if (Pokemon.AllPokemon[i].pokeName.ToLower() == chosenPokemon?.ToLower() && Pokemon.AllPokemon[i].ownerTrainer == "none")
                     {
                         Console.Clear();
                         team.Add(Pokemon.AllPokemon[i]);
@@ -166,7 +166,7 @@ namespace PokemonGame
                 //Checks if the specified player exists
                 for (int i = 0; i < Trainers.Count; i++)
                 {
-                    if (Trainers[i].trainerName.ToLower() == duelledTrainer.ToLower() && duelledTrainer.ToLower() != trainerName.ToLower() && Trainers[i].team.Count != 0)
+                    if (Trainers[i].trainerName.ToLower() == duelledTrainer?.ToLower() && duelledTrainer.ToLower() != trainerName.ToLower() && Trainers[i].team.Count != 0)
                     {
                         playerExists = true;
                         Console.Beep();
@@ -179,7 +179,7 @@ namespace PokemonGame
                         Battle.PokemonBattle();
                         break;
                     }
-                    if (Trainers[i].trainerName.ToLower() == duelledTrainer.ToLower() && duelledTrainer.ToLower() != trainerName.ToLower() && Trainers[i].team.Count == 0)
+                    if (Trainers[i].trainerName.ToLower() == duelledTrainer?.ToLower() && duelledTrainer.ToLower() != trainerName.ToLower() && Trainers[i].team.Count == 0)
                     {
                         Console.WriteLine($"{Trainers[i].trainerName} doesn't have any Pokemon!");
                         break;
