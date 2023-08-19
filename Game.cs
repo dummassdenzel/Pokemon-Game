@@ -8,7 +8,8 @@ namespace PokemonGame
         public static bool GameOngoing = false;
         public static List<Trainer> currentPlayer = new List<Trainer>();
 
-        //The algorithm of the game itself, by Denz.
+        //The algorithm of the game itself, by yours truly.
+        
         public static void StartGame()
         {
 
@@ -111,7 +112,7 @@ namespace PokemonGame
 
                         //Shows all possible actions
                         case "h":
-                            Game.showAllActions();
+                            showAllActions();
                             continue;
 
                         //End the Game
@@ -141,15 +142,107 @@ namespace PokemonGame
             Console.ReadKey();
         }
 
+        //CHARACTER CUSTOMIZATION: Gender*
+        public static string enterYourGender()
+        {
+
+            string? newchargender = null;
+            while (string.IsNullOrEmpty(newchargender))
+            {
+                Console.WriteLine("\nFirst off, trainer, are you a boy or a girl?: ");
+                Console.WriteLine($"\n             [Boy]          [Girl]");
+                Console.Write("-");
+                string? boyorgirl = Console.ReadLine();
+
+                switch (boyorgirl?.ToLower())
+                {
+                    case "m":
+                    case "male":
+                    case "boy":
+                        Console.WriteLine("\nUnderstood!\n");
+                        newchargender = "m";
+                        break;
+
+                    case "f":
+                    case "female":
+                    case "girl":
+                        Console.WriteLine("\nUnderstood!\n");
+                        newchargender = "f";
+                        break;
+
+                    case "g":
+                    case "gay":
+                    case "im gay":
+                    case "lesbian":
+                    case "bi":
+                    case "bisexual":
+                        Console.WriteLine("Sorry, please enter only your biological gender...");
+                        continue;
+
+                    default:
+                        Console.WriteLine("Please answer the question properly.");
+                        continue;
+                }
+
+            }
+            return newchargender;
+        }
+
+        //CHARACTER CUSTOMIZATION: Name*
+        public static string enterYourName()
+        {
+            //Enter your Name
+            string? newcharname = null;
+            while (string.IsNullOrEmpty(newcharname))
+            {
+                Console.WriteLine("Well then, Can I have your name, trainer?: ");
+                Console.Write("-");
+                newcharname = Console.ReadLine();
+                bool alreadyExists = false;
+                if (string.IsNullOrEmpty(newcharname))
+                {
+                    Console.WriteLine("Please enter a valid name.\n");
+                }
+                else
+                {
+                    for (int i = 0; i < Trainer.Players.Count; i++)
+                    {
+                        if (Trainer.Players[i] != null && newcharname != null &&
+                            newcharname.ToLower() == Trainer.Players[i].trainerName?.ToLower())
+                        {
+                            Console.WriteLine("\nSorry, that trainer already exists.\n");
+                            alreadyExists = true;
+                            break;
+                        }
+                    }
+                    if (alreadyExists == true)
+                    {
+                        newcharname = ""; //Reset the name and continue the loop
+                        continue;
+                    }
+
+                    if (newcharname?.ToLower().Contains("gay") == true ||
+                        newcharname?.ToLower().Contains("shit") == true ||
+                        newcharname?.ToLower().Contains("fuck") == true ||
+                        newcharname?.ToLower().Contains("tangina") == true)
+                    {
+                        Console.WriteLine("How rude! Please enter a proper name.\n");
+                        newcharname = ""; //Reset the name and continue the loop
+                        continue;
+                    }
+                }
+            }
+            return newcharname;
+        }
 
         //Custom Character Creation!!!
         public static void CustomTrainerCreation()
-        {
+        {   
             bool charcreation = true;
-
             while (charcreation)
             {
-                Console.WriteLine("-Would you like to create your own character? (y/n): ");
+                Console.WriteLine("-Would you like to create your own character?: ");
+                Console.WriteLine($"\n             [Yes]          [No]");
                 Console.Write("-");
                 string? createchar = Console.ReadLine();
 
@@ -159,105 +252,24 @@ namespace PokemonGame
                     Console.WriteLine("\nUnderstood!\n");
 
 
-                    //Enter your Gender
-                    string? newchargender = null;
-                    bool entergender = true;
-                    while (entergender)
-                    {
-                        Console.WriteLine("\nFirst off, trainer, are you a boy or a girl? (m/f): ");
-                        Console.Write("-");
-                        string? boyorgirl = Console.ReadLine();
+                    //CHARACTER CUSTOMIZATION PHASE 1
+                    
+                    string yourCharGender = enterYourGender();                    
+                    string yourCharName = enterYourName();
+                    
 
-                        switch (boyorgirl?.ToLower())
-                        {
-                            case "m":
-                            case "male":
-                            case "boy":
-                                Console.WriteLine("\nUnderstood!\n");
-                                newchargender = "m";
-                                entergender = false;
-                                break;
+                    //CHARACTER CUSTOMIZATION PHASE 2
 
-                            case "f":
-                            case "female":
-                            case "girl":
-                                Console.WriteLine("\nUnderstood!\n");
-                                newchargender = "f";
-                                entergender = false;
-                                break;
-
-                            case "g":
-                            case "gay":
-                            case "im gay":
-                            case "lesbian":
-                            case "bi":
-                            case "bisexual":
-                                Console.WriteLine("Sorry, please enter only your biological gender...");
-                                continue;
-
-                            default:
-                                Console.WriteLine("Please answer the question properly.");
-                                continue;
-                        }
-
-
-                        //Enter your Name
-                        string? newcharname = null;
-                        while (string.IsNullOrEmpty(newcharname))
-                        {
-                            Console.WriteLine("Well then, Can I have your name, trainer?: ");
-                            Console.Write("-");
-                            newcharname = Console.ReadLine();
-                            bool alreadyExists = false;
-                            if (string.IsNullOrEmpty(newcharname))
-                            {
-                                Console.WriteLine("Please enter a valid name.\n");
-                            }
-                            else
-                            {
-
-
-                                for (int i = 0; i < Trainer.Players.Count; i++)
-                                {
-                                    if (Trainer.Players[i] != null && newcharname != null &&
-                                        newcharname.ToLower() == Trainer.Players[i].trainerName?.ToLower())
-                                    {
-                                        Console.WriteLine("\nSorry, that trainer already exists.\n");
-                                        alreadyExists = true;
-                                        break;
-                                    }
-                                }
-                                if (alreadyExists == true)
-                                {
-                                    newcharname = ""; // Reset the name and continue the loop
-                                    continue;
-                                }
-
-                                if (newcharname?.ToLower().Contains("gay") == true ||
-                                    newcharname?.ToLower().Contains("shit") == true ||
-                                    newcharname?.ToLower().Contains("fuck") == true ||
-                                    newcharname?.ToLower().Contains("tangina") == true)
-                                {
-                                    Console.WriteLine("How rude! Please enter a proper name.\n");
-                                    newcharname = ""; // Reset the name and continue the loop
-                                    continue;
-                                }
-                            }
-                        }
                         Console.Clear();
-                        Trainer newTrainer = new Trainer(newcharname, newchargender, true);
-                        charcreation = false;
+                        Trainer newTrainer = new Trainer(yourCharName, yourCharGender, true);                        
                         break;
-                        //End of Character Creation : "Yes"
-
-                    }
-
+                        //End of Character Creation : "Yes"                
                 }
+
                 if (createchar?.ToLower().Contains("no") == true)
                 {
                     Console.Clear();
-                    Console.WriteLine("Understood!");
-                    charcreation = false;
+                    Console.WriteLine("Understood!");                    
                     break;
                     //End of Character Creation   : "No"
                 }

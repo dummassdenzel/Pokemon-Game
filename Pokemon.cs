@@ -6,6 +6,7 @@ namespace PokemonGame
         //Each individual Pokemon have these Attributes.
 
         //STATS
+        public int pokeID;
         public string pokeName;
         public int hp;
         public int combathp;
@@ -21,7 +22,7 @@ namespace PokemonGame
         public List<Move> LearnableMoves = new List<Move>();
 
 
-        //LEVEL UP SYSTEM
+        //EXP & LEVEL UP SYSTEM
         public List<Pokemon> EvolutionStages = new List<Pokemon>();
         public int pokelevel = 5;
         double totalExp;

@@ -13,7 +13,8 @@ namespace PokemonGame
         //Arrays for Trainers
         public static List<Trainer> Players = new List<Trainer>();
         public static List<Trainer> Trainers = new List<Trainer>();
-        
+
+        //CONSTRUCTOR
         public Trainer(string thistrainername, string thisgender, bool isPlayer)
         {
             this.trainerName = thistrainername;
@@ -27,6 +28,8 @@ namespace PokemonGame
                 Console.WriteLine($"Congratulations! You can now begin your journey, {trainerName}!");
             }
         }
+
+        //Show All Trainers
         public static void ShowAllTrainers()
         {
             Console.WriteLine("\nList of Playable Trainers: ");
@@ -71,8 +74,6 @@ namespace PokemonGame
                 Pokemon.ShowAllPokemon();
                 Console.Write($"{trainerName} - Choose Pokemon to catch: ");
                 string? chosenPokemon = Console.ReadLine();
-
-
 
                 for (int i = 0; i < Pokemon.AllPokemon.Count; i++)
                 {
