@@ -6,7 +6,8 @@ namespace PokemonGame
     {
         public string trainerName;
         public string gender;
-        public List<Pokemon> team = new List<Pokemon>();
+        public List<Pokemon> Team = new List<Pokemon>();
+        public List<Pokemon> battlingTeam = new List<Pokemon>();
         public bool isPlayer;
 
 
@@ -35,11 +36,11 @@ namespace PokemonGame
             Console.WriteLine("\nList of Playable Trainers: ");
             foreach (var item in Players)
             {
-                if (item.team.Count == 0)
+                if (item.Team.Count == 0)
                     Console.WriteLine($"{item.trainerName} - (No Pokemon)");
                 else
                 {
-                    Console.WriteLine($"{item.trainerName} - Pokemon: {item.team.Count}/6");
+                    Console.WriteLine($"{item.trainerName} - Pokemon: {item.Team.Count}/6");
                 }
             }
             Console.WriteLine("--------------------");
@@ -48,11 +49,11 @@ namespace PokemonGame
             {
                 if (item.isPlayer == false)
                 {
-                    if (item.team.Count == 0)
+                    if (item.Team.Count == 0)
                         Console.WriteLine($"{item.trainerName} - (No Pokemon)");
                     else
                     {
-                        Console.WriteLine($"{item.trainerName} - Pokemon: {item.team.Count}/6");
+                        Console.WriteLine($"{item.trainerName} - Pokemon: {item.Team.Count}/6");
                     }
                 }
             }
@@ -80,7 +81,7 @@ namespace PokemonGame
                     if (Pokemon.AllPokemon[i].pokeName.ToLower() == chosenPokemon?.ToLower() && Pokemon.AllPokemon[i].ownerTrainer == "none")
                     {
                         Console.Clear();
-                        team.Add(Pokemon.AllPokemon[i]);
+                        Team.Add(Pokemon.AllPokemon[i]);
                         Pokemon.AllPokemon[i].ownerTrainer = this.trainerName;
                         Console.WriteLine($"Congratulations {trainerName}, you've successfully caught {Pokemon.AllPokemon[i].pokeName}[Lv.{Pokemon.AllPokemon[i].pokelevel}].");
                         Console.WriteLine($"Its stats are: HP:{Pokemon.AllPokemon[i].hp} Attack:{Pokemon.AllPokemon[i].atk} Def:{Pokemon.AllPokemon[i].def} Speed:{Pokemon.AllPokemon[i].speed}\n");
@@ -114,10 +115,10 @@ namespace PokemonGame
 
         //Show a player's Team
         public void ShowTeam()
-        {
+        {   
             Console.WriteLine("---------------------------------------------------------------------------");
             Console.WriteLine($"{trainerName}'s Team:");
-            foreach (var item in team)
+            foreach (var item in Team)
             {
                 if (item.combathp > 0)
                 {
@@ -128,7 +129,8 @@ namespace PokemonGame
                     Console.WriteLine($"[Lv. {item.pokelevel}] {item.pokeName} - HP: *Fainted*");
                 }
 
-                Console.WriteLine($"Atk:{item.atk} Def:{item.def} Speed:{item.speed}\n");
+                Console.WriteLine($"Atk:{item.atk} Def:{item.def} Speed:{item.speed}");
+                Console.WriteLine($"Total Exp Gained: {item.totalExp}\n");
             }
             Console.WriteLine("---------------------------------------------------------------------------\n");
         }
@@ -140,11 +142,11 @@ namespace PokemonGame
             Console.WriteLine("\nMain Trainers: ");
             foreach (var item in Players)
             {
-                if (item.team.Count == 0)
+                if (item.Team.Count == 0)
                     Console.WriteLine($"{item.trainerName} - (No Pokemon)");
                 else
                 {
-                    Console.WriteLine($"{item.trainerName} - Pokemon: {item.team.Count}/6");
+                    Console.WriteLine($"{item.trainerName} - Pokemon: {item.Team.Count}/6");
                 }
             }
             // Console.WriteLine("--------------------");
@@ -155,61 +157,87 @@ namespace PokemonGame
 
 
 
-        //Challenge a Trainer
+        //Challenge a Trainer (kinda proud of this one)
         public void Challenge()
         {
-
-            bool playerExists = false;
-            while (playerExists == false)
+            foreach (var pokemon in Team)
             {
-                Console.Write($"{trainerName} - Enter a Trainer to duel with: ");
-                string? duelledTrainer = Console.ReadLine();
-                //Checks if the specified player exists
-                for (int i = 0; i < Trainers.Count; i++)
+                if (pokemon.combathp > 0)
                 {
-                    if (Trainers[i].trainerName.ToLower() == duelledTrainer?.ToLower() && duelledTrainer.ToLower() != trainerName.ToLower() && Trainers[i].team.Count != 0)
+                    battlingTeam.Add(pokemon);
+                }
+            }
+            if (battlingTeam.Any())
+            {
+                bool playerExists = false;
+                while (playerExists == false)
+                {
+                    Console.Write($"{trainerName} - Enter a Trainer to duel with: ");
+                    string? duelledTrainer = Console.ReadLine();
+
+                    //Checks if the specified player exists
+                    for (int i = 0; i < Trainers.Count; i++)
+                    {
+                        if (Trainers[i].trainerName.ToLower() == duelledTrainer?.ToLower() &&
+                            duelledTrainer.ToLower() != trainerName.ToLower())
+                        {
+                            playerExists = true;
+                            foreach (var pokemon in Trainers[i].Team)
+                            {
+                                if (pokemon.combathp > 0)
+                                {
+                                    Trainers[i].battlingTeam.Add(pokemon);
+                                }
+                            }
+                            if (Trainers[i].battlingTeam.Any())
+                            {
+                                Console.Beep();
+                                Console.Clear();
+                                Battle.BattlingTrainers.Add(this);
+                                Battle.BattlingTrainers.Add(Trainers[i]);
+                                Console.WriteLine("\n---------------------------------------------------------------------------");
+                                Console.WriteLine($"{Battle.BattlingTrainers[0].trainerName} has challenged {Battle.BattlingTrainers[1].trainerName} to a Pokemon Battle!");
+                                Console.WriteLine("---------------------------------------------------------------------------");
+                                Battle.PokemonBattle();
+                                break;
+                            }
+                            else
+                            {
+                                Console.WriteLine($"*{Trainers[i].trainerName} doesn't have any elligible Pokemon!*\n");
+                                playerExists = false;
+                                continue;
+                            }
+                        }
+
+                    }
+
+                    if (trainerName == duelledTrainer)
+                    {
+                        Console.WriteLine("You can't challenge yourself!");
+                        continue;
+                    }
+                    if (duelledTrainer?.ToLower() == "none")
                     {
                         playerExists = true;
-                        Console.Beep();
-                        Console.Clear();
-                        Battle.BattlingTrainers.Add(this);
-                        Battle.BattlingTrainers.Add(Trainers[i]);
-                        Console.WriteLine("\n---------------------------------------------------------------------------");
-                        Console.WriteLine($"{Battle.BattlingTrainers[0].trainerName} has challenged {Battle.BattlingTrainers[1].trainerName} to a Pokemon Battle!");
-                        Console.WriteLine("---------------------------------------------------------------------------");
-                        Battle.PokemonBattle();
                         break;
                     }
-                    if (Trainers[i].trainerName.ToLower() == duelledTrainer?.ToLower() && duelledTrainer.ToLower() != trainerName.ToLower() && Trainers[i].team.Count == 0)
+                    if (playerExists == false)
                     {
-                        Console.WriteLine($"{Trainers[i].trainerName} doesn't have any Pokemon!");
-                        break;
+                        Console.WriteLine("Please enter a valid trainer's name.");
+                        continue;
                     }
-
                 }
-
-                if (trainerName == duelledTrainer)
-                {
-                    Console.WriteLine("You can't challenge yourself!");
-                    continue;
-                }
-                if (duelledTrainer == "none" || duelledTrainer == "None")
-                {
-                    playerExists = true;
-                    break;
-                }
-                if (playerExists == false)
-                {
-                    Console.WriteLine("Please enter a valid trainer's name!");
-                    continue;
-                }
+            }
+            else
+            {
+                Console.WriteLine("*You dont have any elligible Pokemon!*");
             }
         }
 
         //Heal your Pokemon at the Pokemon Center
         public void PokemonCenter()
         {
-            foreach (var pokemon in this.team)
+            foreach (var pokemon in Team)
             {
                 pokemon.combathp = pokemon.hp;
             }
@@ -233,7 +261,7 @@ namespace PokemonGame
             Pokemon NPpokemon = pokemon;
             NPpokemon.ownerTrainer = this.trainerName;
             NPpokemon.pokelevel = level;
-            this.team.Add(NPpokemon);
+            this.Team.Add(NPpokemon);
         }
 
 

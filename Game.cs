@@ -9,7 +9,7 @@ namespace PokemonGame
         public static List<Trainer> currentPlayer = new List<Trainer>();
 
         //The algorithm of the game itself, by yours truly.
-        
+
         public static void StartGame()
         {
 
@@ -43,9 +43,15 @@ namespace PokemonGame
                 }
 
                 bool mainMenu = true;
+                bool showmenu = true;
                 while (mainMenu == true)
                 {
-                    showAllActions();
+
+                    if (showmenu)
+                    {
+                        showAllActions();
+                    }
+                    showmenu = true;
                     Console.WriteLine("---------------------------------------------------------------------------");
                     Console.Write($"What do you want to do, {currentPlayer[0].trainerName}?: ");
                     string? whatDoYouWannaDo = Console.ReadLine();
@@ -60,23 +66,17 @@ namespace PokemonGame
 
                         //Challenge a Trainer
                         case "challenge a trainer" or "2":
-                            if (currentPlayer[0].team.Count != 0)
-                            {
-                                Console.Clear();
-                                Trainer.ShowAllTrainers();
-                                currentPlayer[0].Challenge();
-                            }
-                            else
-                            {
-                                Console.WriteLine("You dont have any Pokemon!");
-                                continue;
-                            }
+                            Console.Clear();
+                            Trainer.ShowAllTrainers();
+                            currentPlayer[0].Challenge();
+                            showmenu = false;
                             break;
 
                         //Show Current Trainer's Team
                         case "show team" or "3":
                             currentPlayer[0].ShowTeam();
                             Console.Beep();
+                            showmenu = false;
                             break;
 
                         //Heals the current Player's Pokemon
@@ -99,6 +99,7 @@ namespace PokemonGame
                             Trainer.ShowAllTrainers();
                             Console.WriteLine("--------------------");
                             Console.Beep();
+                            showmenu = false;
                             continue;
 
                         //Select a different Trainer
@@ -217,7 +218,7 @@ namespace PokemonGame
                     }
                     if (alreadyExists == true)
                     {
-                        newcharname = ""; //Reset the name and continue the loop
+                        newcharname = null; //Reset the name and continue the loop
                         continue;
                     }
 
@@ -227,7 +228,7 @@ namespace PokemonGame
                         newcharname?.ToLower().Contains("tangina") == true)
                     {
                         Console.WriteLine("How rude! Please enter a proper name.\n");
-                        newcharname = ""; //Reset the name and continue the loop
+                        newcharname = null; //Reset the name and continue the loop
                         continue;
                     }
                 }
@@ -237,7 +238,7 @@ namespace PokemonGame
 
         //Custom Character Creation!!!
         public static void CustomTrainerCreation()
-        {   
+        {
             bool charcreation = true;
             while (charcreation)
             {
@@ -253,23 +254,23 @@ namespace PokemonGame
 
 
                     //CHARACTER CUSTOMIZATION PHASE 1
-                    
-                    string yourCharGender = enterYourGender();                    
+
+                    string yourCharGender = enterYourGender();
                     string yourCharName = enterYourName();
-                    
+
 
                     //CHARACTER CUSTOMIZATION PHASE 2
 
-                        Console.Clear();
-                        Trainer newTrainer = new Trainer(yourCharName, yourCharGender, true);                        
-                        break;
-                        //End of Character Creation : "Yes"                
+                    Console.Clear();
+                    Trainer newTrainer = new Trainer(yourCharName, yourCharGender, true);
+                    break;
+                    //End of Character Creation : "Yes"                
                 }
 
                 if (createchar?.ToLower().Contains("no") == true)
                 {
                     Console.Clear();
-                    Console.WriteLine("Understood!");                    
+                    Console.WriteLine("Understood!");
                     break;
                     //End of Character Creation   : "No"
                 }

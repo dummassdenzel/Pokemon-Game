@@ -11,7 +11,9 @@ namespace PokemonGame
         public int hp;
         public int combathp;
         public int atk;
+        public int spatk;
         public int def;
+        public int spdef;
         public int speed;
         public Types poketype1;
         public Types poketype2;
@@ -24,45 +26,165 @@ namespace PokemonGame
 
         //EXP & LEVEL UP SYSTEM
         public List<Pokemon> EvolutionStages = new List<Pokemon>();
+        //note to self make classes for all pokemon and inherit pokemon class, that's where you declare the level
         public int pokelevel = 5;
-        double totalExp;
+        public double totalExp;
         public double expGained;
-        public int expYield = 120;
-        public void GainExp(Pokemon pokemon)
-        {
-            int priorlevel = this.pokelevel;
-
-            expGained = ((pokemon.expYield * pokelevel) / 7) * 1.5;          
-            this.totalExp += (int)expGained;
-            Console.WriteLine($"{this.pokeName} gained {(int)expGained} Exp.");
-            
-            double expToLevel = Math.Floor(Math.Cbrt(this.totalExp));
-            pokelevel = (int)expToLevel;
-            if (priorlevel < pokelevel)
-            {
-                Console.WriteLine($"{this.pokeName} leveled up to Lv.{this.pokelevel}!");
-            }
-        }
-
-
+        public int expYield = 64;
 
         //POKEMON CONSTRUCTOR
         // Name, HP, ATK, DEF, SPEED, TYPE1, TYPE2
         public Pokemon(string thisname, int thishp, int thisatk, int thisdef, int thisspeed, Types thistype1, Types thistype2)
         {
 
-            this.pokeName = thisname;
-            this.hp = thishp;
-            this.atk = thisatk;
-            this.def = thisdef;
-            this.speed = thisspeed;
-            this.combathp = hp;
-            this.poketype1 = thistype1;
-            this.poketype2 = thistype2;
-            double totalExp = Math.Pow(pokelevel, 3);
+            pokeName = thisname;
+            hp = thishp;
+            atk = thisatk;
+            def = thisdef;
+            speed = thisspeed;
+            combathp = hp;
+            poketype1 = thistype1;
+            poketype2 = thistype2;
+            totalExp = Math.Pow(pokelevel, 3);
             AllPokemon.Add(this);
 
 
+        }
+
+        //Essential Pokemon Battle Functions
+        public void Attack(Pokemon target)
+        {
+            bool Useable = false;
+            while (Useable == false)
+            {
+                Console.Write("Enter the Move you want to use: ");
+                string? specifiedMove = Console.ReadLine();
+
+                for (int i = 0; i < LearnedMoves.Count; i++)
+                {
+                    //If move is Usable
+                    if (specifiedMove?.ToLower() == LearnedMoves[i].moveName.ToLower())
+                    {
+                        Useable = true;
+                        int movePower = LearnedMoves[i].moveBasePower;
+                        int Effectiveness = 0;
+                        int AttackDMG;
+
+                        //SAME TYPE ATTACK BONUS
+                        if (LearnedMoves[i].movetype == poketype1 || LearnedMoves[i].movetype == poketype2)
+                        {
+                            movePower = movePower + (movePower / 2);
+                        }
+                        //DAMAGE CALCULATOR
+                        AttackDMG = (((2 * pokelevel) / 5 + 2) * movePower * atk / target.def) / 50 + 2;
+
+
+                        //TYPE DAMAGE CALCULATOR
+
+                        //Resistances                        
+                        for (int rs1 = 0; rs1 < target.poketype1.Resistances.Count; rs1++)
+                        {
+                            if (target.poketype1.Resistances[rs1] == LearnedMoves[i].movetype)
+                            {
+                                Effectiveness -= 1;
+                            }
+                        }
+                        for (int rs2 = 0; rs2 < target.poketype2.Resistances.Count; rs2++)
+                        {
+                            if (target.poketype2.Resistances[rs2] == LearnedMoves[i].movetype)
+                            {
+                                Effectiveness -= 1;
+                            }
+                        }
+                        //Weaknesses
+                        for (int wk1 = 0; wk1 < target.poketype1.Weaknesses.Count; wk1++)
+                        {
+                            if (target.poketype1.Weaknesses[wk1] == LearnedMoves[i].movetype)
+                            {
+                                Effectiveness += 1;
+                            }
+                        }
+                        for (int wk2 = 0; wk2 < target.poketype2.Weaknesses.Count; wk2++)
+                        {
+                            if (target.poketype2.Weaknesses[wk2] == LearnedMoves[i].movetype)
+                            {
+                                Effectiveness += 1;
+                            }
+                        }
+                        //Immunities
+                        for (int im1 = 0; im1 < target.poketype1.Immunities.Count; im1++)
+                        {
+                            if (target.poketype1.Immunities[im1] == LearnedMoves[i].movetype)
+                            {
+                                Effectiveness = -3;
+                            }
+                        }
+                        for (int im2 = 0; im2 < target.poketype2.Immunities.Count; im2++)
+                        {
+                            if (target.poketype2.Immunities[im2] == LearnedMoves[i].movetype)
+                            {
+                                Effectiveness = -3;
+                            }
+                        }
+                        Console.Clear();                        
+                        Console.WriteLine("---------------------------------------------------------------------------");
+                        Console.WriteLine($"{pokeName} used {LearnedMoves[i].moveName}!");                        
+
+                        switch (Effectiveness)
+                        {
+                            case 1:
+                                AttackDMG = AttackDMG * 2;
+                                Console.WriteLine("It was super effective!");
+                                break;
+                            case 2:
+                                AttackDMG = AttackDMG * 2 + (AttackDMG / 2);
+                                Console.WriteLine("It was drastically effective!!");
+                                break;
+                            case -1:
+                                AttackDMG = AttackDMG - (AttackDMG / 2);
+                                Console.WriteLine("It was not very effective.");
+                                break;
+                            case -2:
+                                AttackDMG = (AttackDMG - (AttackDMG / 2)) / 2;
+                                Console.WriteLine("It was extremely ineffective.");
+                                break;
+                            case -3:
+                                AttackDMG = 0;
+                                Console.WriteLine($"Oh no! {target.pokeName} was immune to the move!");
+                                break;
+
+                            default:
+                                break;
+                        }
+                        target.combathp -= AttackDMG;
+                        Console.WriteLine($"{LearnedMoves[i].moveName} dealt {AttackDMG} damage!");
+                        Console.WriteLine("---------------------------------------------------------------------------");
+                    }
+                    //If move is not Usable
+
+
+                }
+                if (Useable == false)
+                {
+                    Console.WriteLine("*Please enter a move your current Pokemon can use!");
+                    continue;
+                }
+            }
+        }
+        public void GainExp(Pokemon pokemon)
+        {
+            int priorlevel = this.pokelevel;
+
+            expGained = ((pokemon.expYield * pokemon.pokelevel) / 7) * 1.5;
+            this.totalExp += (int)expGained;
+            Console.WriteLine($"{this.pokeName} gained {(int)expGained} Exp.");
+
+            double expToLevel = Math.Floor(Math.Cbrt(this.totalExp));
+            pokelevel = (int)expToLevel;
+            if (priorlevel < pokelevel)
+            {
+                Console.WriteLine($"{this.pokeName} leveled up to Lv.{this.pokelevel}!");
+            }
         }
 
 
@@ -91,6 +213,7 @@ namespace PokemonGame
         // Grass Type Pokemon
         public static Pokemon Venusaur = new Pokemon("Venusaur", 24, 16, 16, 14, Types.Grass, Types.Poison);
         public static Pokemon Tsareena = new Pokemon("Tsareena", 23, 18, 15, 13, Types.Grass, Types.none);
+        public static Pokemon Chikorita = new Pokemon("Chikorita", 45, 49, 65, 49, Types.Grass, Types.none);
 
 
         // Fire Type Pokemon
@@ -206,6 +329,7 @@ namespace PokemonGame
             Greninja.LearnMove(Move.DarkPulse);
             //Grass Type Pokemon
             Venusaur.LearnMove(Move.PetalDance);
+            Chikorita.LearnMove(Move.PetalDance);
             Tsareena.LearnMove(Move.TropKick);
             Tsareena.LearnMove(Move.HighJumpKick);
             Tsareena.LearnMove(Move.PlayRough);

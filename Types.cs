@@ -11,7 +11,7 @@ namespace PokemonGame
 
         public Types(string thistype)
         {
-            this.type = thistype;
+            type = thistype;
         }
 
         public static Types Normal = new Types("Normal");

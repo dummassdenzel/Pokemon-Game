@@ -6,17 +6,17 @@ namespace PokemonGame
     {
 
         public string moveName;
-        public int moveDamage;
+        public int moveBasePower;
         public Types movetype;
 
-        public Move(string move, int damage, Types thistype)
+        public Move(string move, int power, Types thistype)
         {
 
             this.moveName = move;
-            this.moveDamage = damage;
+            this.moveBasePower = power;
             this.movetype = thistype;
         }
-
+        
 
         //NOTE TO SELF: If you find yourself using this method of making moves, compute the moveDamage with
         // "moveDamage * Trainer.ActivePokemon[0].atk) / 100;" in Battle
@@ -32,7 +32,7 @@ namespace PokemonGame
         public static Move FireFang = new Move("Fire Fang", 65, Types.Fire);
 
         //Grass Types Moves
-        public static Move PetalDance = new Move("Solar Beam", 100, Types.Grass);
+        public static Move PetalDance = new Move("Petal Dance", 100, Types.Grass);
         public static Move TropKick = new Move("Trop Kick", 80, Types.Grass);
 
         //Steel Types Moves
