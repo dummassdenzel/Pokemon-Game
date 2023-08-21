@@ -38,6 +38,7 @@ namespace PokemonGame
                 return false;
             }
         }
+
         //BATTLE SYSTEM
         public string ownerTrainer = "none";
         public List<Move> LearnedMoves = new List<Move>();
@@ -225,11 +226,11 @@ namespace PokemonGame
 
 
 
-        //Show All Catchable Pokemon
+        //Show All Pokemon
         public static void ShowAllPokemon()
         {
-            Console.WriteLine("\nList of all Catchable Pokemon: ");
-            foreach (var item in Pokemon.AllPokemon)
+            Console.WriteLine("\nList of all Pokemon: ");
+            foreach (var item in AllPokemon)
             {
                 Console.WriteLine(item.pokeName);
             }
@@ -245,7 +246,7 @@ namespace PokemonGame
         //Bulbasaur Line
         public static Pokemon Venusaur = new Pokemon("Venusaur", 80, 82, 83, 100, 100, 80, Types.Grass, Types.Poison, 208, 0)
         {
-            LearnedMoves = { Move.SolarBeam, Move.TakeDown }
+            LearnedMoves = { Move.SolarBeam, Move.PetalDance, Move.TakeDown }
         };
         public static Pokemon Ivysaur = new Pokemon("Ivysaur", 60, 62, 63, 80, 80, 60, Types.Grass, Types.Poison, 141, 32)
         {
@@ -255,7 +256,7 @@ namespace PokemonGame
         public static Pokemon Bulbasaur = new Pokemon("Bulbasaur", 45, 49, 49, 65, 65, 45, Types.Grass, Types.Poison, 64, 16)
         {
             EvolutionStages = { Ivysaur, Venusaur },
-            LearnedMoves = { Move.RazorLeaf }
+            LearnedMoves = { Move.RazorLeaf, Move.Tackle }
         };
         //Bounsweet Line
         public static Pokemon Tsareena = new Pokemon("Tsareena", 72, 120, 98, 50, 98, 72, Types.Grass, Types.none, 230, 0)
@@ -275,12 +276,12 @@ namespace PokemonGame
         //Chikorita Line
         public static Pokemon Meganium = new Pokemon("Meganium", 80, 82, 100, 83, 100, 80, Types.Grass, Types.none, 208, 0)
         {
-            LearnedMoves = { Move.PetalDance, Move.BodySlam }
+            LearnedMoves = { Move.PetalDance, Move.EnergyBall, Move.BodySlam }
         };
         public static Pokemon Bayleef = new Pokemon("Bayleef", 60, 62, 80, 63, 80, 60, Types.Grass, Types.none, 141, 32)
         {
             EvolutionStages = { Meganium },
-            LearnedMoves = { Move.RazorLeaf, Move.Stomp }
+            LearnedMoves = { Move.EnergyBall, Move.Stomp }
         };
         public static Pokemon Chikorita = new Pokemon("Chikorita", 45, 49, 65, 49, 65, 49, Types.Grass, Types.none, 64, 16)
         {
@@ -304,7 +305,7 @@ namespace PokemonGame
         public static Pokemon Charmander = new Pokemon("Charmander", 39, 55, 50, 60, 50, 65, Types.Fire, Types.none, 65, 16)
         {
             EvolutionStages = { Charmeleon, Charizard },
-            LearnedMoves = { Move.Ember, Move.Fly, Move.Scratch }
+            LearnedMoves = { Move.Ember, Move.Scratch }
         };
         //Torchic Line
         public static Pokemon Blaziken = new Pokemon("Blaziken", 80, 120, 70, 110, 70, 80, Types.Fire, Types.Fighting, 209, 0)
@@ -348,7 +349,7 @@ namespace PokemonGame
         //Squirtle Line
         public static Pokemon Blastoise = new Pokemon("Blastoise", 79, 83, 100, 85, 105, 78, Types.Water, Types.none, 210, 0)
         {
-            LearnedMoves = { Move.Surf, Move.FlashCannon, Move.SkullBash, Move.Bite }
+            LearnedMoves = { Move.Surf, Move.FlashCannon, Move.DoubleEdge, Move.Bite }
         };
         public static Pokemon Wartortle = new Pokemon("Wartortle", 59, 63, 80, 65, 80, 58, Types.Water, Types.none, 143, 36)
         {
@@ -378,7 +379,7 @@ namespace PokemonGame
         //Froakie Line
         public static Pokemon Greninja = new Pokemon("Greninja", 72, 95, 67, 103, 71, 122, Types.Water, Types.Dark, 239, 0)
         {
-            LearnedMoves = { Move.WaterShuriken, Move.NightSlash, Move.AerialAce, Move.Extrasensory }
+            LearnedMoves = { Move.WaterShuriken, Move.NightSlash, Move.AerialAce, Move.Waterfall }
         };
         public static Pokemon Frogadier = new Pokemon("Frogadier", 54, 63, 52, 83, 56, 97, Types.Water, Types.Dark, 142, 36)
         {
@@ -401,69 +402,286 @@ namespace PokemonGame
 
 
         // Electric Type Pokemon
-        public static Pokemon Pikachu = new Pokemon("Pikachu", 35, 55, 30, 50, 40, 90, Types.Electric, Types.none, 82, 0)
-        {            
-            LearnedMoves = { Move.Thunderbolt, Move.QuickAttack }
+
+        //Pikachu Line
+        public static Pokemon Pikachu = new Pokemon("Pikachu", 50, 70, 40, 70, 40, 100, Types.Electric, Types.none, 82, 0)
+        {
+            LearnedMoves = { Move.Thunderbolt, Move.Spark, Move.QuickAttack, Move.Slam }
         };
+        //Shinx Line
         public static Pokemon Luxray = new Pokemon("Luxray", 80, 120, 79, 95, 79, 70, Types.Electric, Types.none, 194, 0)
         {
-            LearnedMoves = { Move.Thunderbolt, Move.Crunch, Move.Tackle }
+            LearnedMoves = { Move.WildCharge, Move.Crunch, Move.Tackle }
         };
         public static Pokemon Luxio = new Pokemon("Luxio", 60, 85, 49, 60, 49, 60, Types.Electric, Types.none, 117, 30)
         {
+            EvolutionStages = { Luxray },
             LearnedMoves = { Move.Spark, Move.Bite, Move.Tackle }
         };
         public static Pokemon Shinx = new Pokemon("Shinx", 80, 120, 79, 95, 79, 70, Types.Electric, Types.none, 194, 15)
         {
+            EvolutionStages = { Luxio, Luxray },
             LearnedMoves = { Move.Thunderbolt, Move.Crunch, Move.Tackle }
         };
 
 
-        // // Psychic Type Pokemon
-        // public static Pokemon Alakazam = new Pokemon("Alakazam", 22, 20, 14, 18, Types.Psychic, Types.none, 186, 0);
-        // public static Pokemon Gardevoir = new Pokemon("Gardevoir", 23, 19, 15, 14, Types.Psychic, Types.Fairy, 208, 0);
-        // public static Pokemon Gallade = new Pokemon("Gallade", 22, 18, 15, 14, Types.Psychic, Types.Fighting, 208, 0);
+        // Psychic Type Pokemon
+
+        //Ralts Line
+        public static Pokemon Gardevoir = new Pokemon("Gardevoir", 68, 65, 65, 125, 115, 80, Types.Psychic, Types.Fairy, 208, 0)
+        {
+            LearnedMoves = { Move.Psychic, Move.MoonBlast }
+        };
+        public static Pokemon Gallade = new Pokemon("Gallade", 68, 125, 65, 65, 115, 80, Types.Psychic, Types.Fighting, 208, 0)
+        {
+            LearnedMoves = { Move.PsychoCut, Move.CloseCombat, Move.LeafBlade, Move.NightSlash }
+        };
+        public static Pokemon Kirlia = new Pokemon("Kirlia", 38, 35, 35, 65, 55, 50, Types.Psychic, Types.Fairy, 140, 30)
+        {
+            EvolutionStages = { Gardevoir, Gallade },
+            LearnedMoves = { Move.Psybeam, Move.DisarmingVoice }
+        };
+        public static Pokemon Ralts = new Pokemon("Ralts", 28, 25, 25, 45, 35, 40, Types.Psychic, Types.Fairy, 70, 20)
+        {
+            EvolutionStages = { Kirlia, Gardevoir, Gallade },
+            LearnedMoves = { Move.Confusion, Move.DisarmingVoice }
+        };
+        //Abra Line
+        public static Pokemon Alakazam = new Pokemon("Alakazam", 55, 50, 45, 135, 85, 120, Types.Psychic, Types.none, 186, 0)
+        {
+            LearnedMoves = { Move.Psychic, Move.EnergyBall, Move.ShadowBall, Move.DazzlingGleam }
+        };
+        public static Pokemon Kadabra = new Pokemon("Kadabra", 40, 35, 30, 120, 70, 105, Types.Psychic, Types.none, 145, 36)
+        {
+            EvolutionStages = { Alakazam },
+            LearnedMoves = { Move.Psybeam, Move.EnergyBall, Move.ShadowBall }
+        };
+        public static Pokemon Abra = new Pokemon("Abra", 25, 20, 15, 105, 55, 90, Types.Psychic, Types.none, 73, 16)
+        {
+            EvolutionStages = { Kadabra, Alakazam },
+            LearnedMoves = { Move.Confusion }
+        };
 
 
-        // // Fighting Type Pokemon     
-        // public static Pokemon Lucario = new Pokemon("Lucario", 23, 17, 13, 15, Types.Fighting, Types.Steel, 204, 0);
-        // public static Pokemon Machamp = new Pokemon("Machamp", 25, 19, 14, 12, Types.Fighting, Types.none, 193, 0);
+        // Fighting Type Pokemon  
+
+        //Riolu Line   
+        public static Pokemon Lucario = new Pokemon("Lucario", 70, 110, 70, 115, 70, 90, Types.Fighting, Types.Steel, 204, 0)
+        {
+            LearnedMoves = { Move.CloseCombat, Move.AuraSphere, Move.MeteorMash, Move.Extremespeed }
+        };
+        public static Pokemon Riolu = new Pokemon("Riolu", 40, 70, 40, 35, 40, 60, Types.Fighting, Types.none, 72, 30)
+        {
+            EvolutionStages = { Lucario },
+            LearnedMoves = { Move.ForcePalm, Move.QuickAttack }
+        };
+        //Machop Line
+        public static Pokemon Machamp = new Pokemon("Machamp", 90, 130, 80, 65, 85, 55, Types.Fighting, Types.none, 193, 0)
+        {
+            LearnedMoves = { Move.CloseCombat, Move.StoneEdge, Move.CrossChop }
+        };
+        public static Pokemon Machoke = new Pokemon("Machoke", 80, 100, 70, 50, 60, 45, Types.Fighting, Types.none, 146, 42)
+        {
+            EvolutionStages = { Machamp },
+            LearnedMoves = { Move.Submission, Move.RockSlide }
+        };
+        public static Pokemon Machop = new Pokemon("Machop", 70, 80, 50, 35, 35, 35, Types.Fighting, Types.none, 88, 28)
+        {
+            EvolutionStages = { Machoke, Machamp },
+            LearnedMoves = { Move.KarateChop }
+        };
 
 
-        // // Normal Type Pokemon
-        // public static Pokemon Snorlax = new Pokemon("Snorlax", 32, 17, 15, 9, Types.Normal, Types.none, 154, 0);
+        // Normal Type Pokemon
+
+        //Munchlax Line
+        public static Pokemon Snorlax = new Pokemon("Snorlax", 160, 110, 65, 65, 110, 30, Types.Normal, Types.none, 154, 0)
+        {
+            LearnedMoves = { Move.BodySlam, Move.HeavySlam, Move.Earthquake, Move.Crunch }
+        };
 
 
-        // // Ghost Type Pokemon
-        // public static Pokemon Gengar = new Pokemon("Gengar", 22, 19, 14, 17, Types.Ghost, Types.Poison, 190, 0);
+        // Ghost Type Pokemon
+
+        //Gastly Line
+        public static Pokemon Gengar = new Pokemon("Gengar", 60, 65, 60, 130, 75, 110, Types.Ghost, Types.Poison, 190, 0)
+        {
+            LearnedMoves = { Move.ShadowBall, Move.DarkPulse, Move.SludgeBomb }
+        };
+        public static Pokemon Haunter = new Pokemon("Haunter", 45, 50, 45, 115, 55, 95, Types.Ghost, Types.Poison, 126, 40)
+        {
+            EvolutionStages = { Gengar },
+            LearnedMoves = { Move.ShadowBall, Move.SuckerPunch, Move.ShadowPunch }
+        };
+        public static Pokemon Gastly = new Pokemon("Gastly", 30, 35, 30, 100, 35, 80, Types.Ghost, Types.Poison, 95, 25)
+        {
+            EvolutionStages = { Haunter, Gengar },
+            LearnedMoves = { Move.NightShade }
+        };
 
 
-        // // Dark Type Pokemon
-        // public static Pokemon Zoroark = new Pokemon("Zoroak", 22, 18, 12, 17, Types.Dark, Types.none, 179, 0);
+        // Dark Type Pokemon
+
+        //Zorua Line
+        public static Pokemon Zoroark = new Pokemon("Zoroark", 60, 105, 60, 120, 60, 105, Types.Dark, Types.none, 179, 0)
+        {
+            LearnedMoves = { Move.DarkPulse, Move.NightSlash, Move.AerialAce }
+        };
+        public static Pokemon Zorua = new Pokemon("Zorua", 40, 65, 40, 80, 40, 65, Types.Dark, Types.none, 66, 30)
+        {
+            EvolutionStages = { Zoroark },
+            LearnedMoves = { Move.FaintAttack, Move.Scratch }
+        };
 
 
-        // // Bug Type Pokemon
+        // Bug Type Pokemon
 
 
-        // // Rock Type Pokemon
-        // public static Pokemon Tyranitar = new Pokemon("Tyranitar", 26, 19, 17, 12, Types.Rock, Types.Dark, 218, 0);
 
 
-        // // Ground Type Pokemon
-        // public static Pokemon Krookodile = new Pokemon("Krookodile", 26, 18, 14, 15, Types.Ground, Types.Dark, 229, 0);
-        // public static Pokemon Golurk = new Pokemon("Golurk", 24, 18, 14, 11, Types.Ground, Types.Ghost, 169, 0);
+        // Rock Type Pokemon
+
+        //Larvitar Line
+        public static Pokemon Tyranitar = new Pokemon("Tyranitar", 100, 134, 110, 95, 100, 61, Types.Rock, Types.Dark, 218, 0)
+        {
+            LearnedMoves = { Move.StoneEdge, Move.Crunch, Move.Earthquake }
+        };
+        public static Pokemon Pupitar = new Pokemon("Pupitar", 70, 84, 70, 65, 70, 51, Types.Rock, Types.Ground, 144, 55)
+        {
+            EvolutionStages = { Tyranitar },
+            LearnedMoves = { Move.RockSlide, Move.Crunch, Move.Tackle }
+        };
+        public static Pokemon Larvitar = new Pokemon("Larvitar", 50, 64, 50, 45, 50, 41, Types.Rock, Types.Ground, 67, 30)
+        {
+            EvolutionStages = { Pupitar, Tyranitar },
+            LearnedMoves = { Move.RockThrow, Move.Bite, Move.Tackle }
+        };
 
 
-        // // Steel Type Pokemon
-        // public static Pokemon Metagross = new Pokemon("Metagross", 24, 20, 19, 13, Types.Steel, Types.Psychic, 210, 0);
-        // public static Pokemon Aggron = new Pokemon("Aggron", 23, 17, 24, 11, Types.Steel, Types.Rock, 205, 0);
+        // Ground Type Pokemon
 
-        // // Dragon Type Pokemon
-        // public static Pokemon Garchomp = new Pokemon("Garchomp", 26, 19, 15, 16, Types.Dragon, Types.Ground, 218, 0);
-        // public static Pokemon Dragonite = new Pokemon("Dragonite", 25, 19, 15, 14, Types.Dragon, Types.Flying, 218, 0);
+        //Sandile Line
+        public static Pokemon Krookodile = new Pokemon("Krookodile", 95, 117, 70, 65, 70, 92, Types.Ground, Types.Dark, 229, 0)
+        {
+            LearnedMoves = { Move.Earthquake, Move.Crunch }
+        };
+        public static Pokemon Krokorok = new Pokemon("Krokorok", 60, 82, 45, 45, 45, 72, Types.Ground, Types.Dark, 123, 40)
+        {
+            EvolutionStages = { Krookodile },
+            LearnedMoves = { Move.Bulldoze, Move.Crunch }
+        };
+        public static Pokemon Sandile = new Pokemon("Sandile", 50, 72, 35, 35, 35, 65, Types.Ground, Types.Dark, 58, 29)
+        {
+            EvolutionStages = { Krokorok, Krookodile },
+            LearnedMoves = { Move.Bite }
+        };
+        //Trapinch Line
+        public static Pokemon Flygon = new Pokemon("Flygon", 80, 100, 80, 80, 80, 100, Types.Ground, Types.Dragon, 197, 0)
+        {
+            LearnedMoves = { Move.DragonClaw, Move.Earthquake, Move.Crunch, Move.RockSlide }
+        };
+        public static Pokemon Vibrava = new Pokemon("Vibrava", 50, 70, 50, 50, 50, 70, Types.Ground, Types.Dragon, 126, 45)
+        {
+            EvolutionStages = { Flygon },
+            LearnedMoves = { Move.DragonBreath, Move.Bulldoze, Move.Crunch }
+        };
+        public static Pokemon Trapinch = new Pokemon("Trapinch", 45, 100, 45, 45, 45, 10, Types.Ground, Types.none, 73, 35)
+        {
+            EvolutionStages = { Vibrava, Flygon },
+            LearnedMoves = { Move.Bite, Move.SandTomb }
+        };
 
-        // //Flying Type Pokemon
-        // public static Pokemon Staraptor = new Pokemon("Staraptor", 24, 18, 13, 16, Types.Flying, Types.Normal, 172, 0);
+
+        // Steel Type Pokemon
+
+        //Beldum Line
+        public static Pokemon Metagross = new Pokemon("Metagross", 80, 135, 130, 95, 90, 70, Types.Steel, Types.Psychic, 210, 0)
+        {
+            LearnedMoves = { Move.MeteorMash, Move.Psychic, Move.HammerArm, Move.Earthquake }
+        };
+        public static Pokemon Metang = new Pokemon("Metang", 60, 75, 100, 55, 80, 50, Types.Steel, Types.Psychic, 153, 45)
+        {
+            EvolutionStages = { Metagross },
+            LearnedMoves = { Move.MetalClaw, Move.Psychic, Move.TakeDown }
+        };
+        public static Pokemon Beldum = new Pokemon("Beldum", 40, 55, 80, 35, 60, 30, Types.Steel, Types.Psychic, 103, 20)
+        {
+            EvolutionStages = { Metang, Metagross },
+            LearnedMoves = { Move.TakeDown }
+        };
+        //Aron Line
+        public static Pokemon Aggron = new Pokemon("Aggron", 70, 110, 180, 60, 60, 50, Types.Steel, Types.Rock, 205, 0)
+        {
+            LearnedMoves = { Move.HeavySlam, Move.RockSlide, Move.DoubleEdge, Move.IronTail }
+        };
+        public static Pokemon Lairon = new Pokemon("Lairon", 60, 90, 140, 50, 50, 40, Types.Steel, Types.Rock, 152, 42)
+        {
+            EvolutionStages = { Aggron },
+            LearnedMoves = { Move.IronHead, Move.RockSlide, Move.TakeDown }
+        };
+        public static Pokemon Aron = new Pokemon("Aron", 50, 70, 100, 50, 50, 40, Types.Steel, Types.Rock, 96, 32)
+        {
+            EvolutionStages = { Lairon, Aggron },
+            LearnedMoves = { Move.MetalClaw, Move.RockThrow, Move.Tackle }
+        };
+
+
+        // Dragon Type Pokemon
+
+        //Gible Line
+        public static Pokemon Garchomp = new Pokemon("Garchomp", 108, 130, 95, 80, 85, 102, Types.Dragon, Types.Ground, 218, 0)
+        {
+            LearnedMoves = { Move.DragonClaw, Move.Earthquake, Move.Crunch, Move.TakeDown }
+        };
+        public static Pokemon Gabite = new Pokemon("Gabite", 68, 90, 65, 50, 55, 82, Types.Dragon, Types.Ground, 144, 48)
+        {
+            EvolutionStages = { Garchomp },
+            LearnedMoves = { Move.DragonBreath, Move.Bulldoze, Move.Bite, Move.Slash }
+        };
+        public static Pokemon Gible = new Pokemon("Gible", 58, 70, 45, 40, 45, 42, Types.Dragon, Types.Ground, 67, 24)
+        {
+            EvolutionStages = { Gabite, Garchomp },
+            LearnedMoves = { Move.DragonBreath, Move.SandTomb, Move.Bite }
+        };
+        //Dratini Line
+        public static Pokemon Dragonite = new Pokemon("Dragonite", 91, 134, 95, 100, 100, 80, Types.Dragon, Types.Flying, 218, 0)
+        {
+            LearnedMoves = { Move.Hurricane, Move.DragonClaw, Move.AquaTail, Move.Extremespeed }
+        };
+        public static Pokemon Dragonair = new Pokemon("Dragonair", 61, 84, 65, 70, 70, 70, Types.Dragon, Types.none, 144, 55)
+        {
+            EvolutionStages = { Dragonite },
+            LearnedMoves = { Move.DragonTail, Move.AquaTail, Move.Slam }
+        };
+        public static Pokemon Dratini = new Pokemon("Dratini", 41, 64, 45, 50, 50, 50, Types.Dragon, Types.none, 67, 30)
+        {
+            EvolutionStages = { Dragonair, Dragonite },
+            LearnedMoves = { Move.Slam }
+        };
+
+        //Flying Type Pokemon
+        public static Pokemon Staraptor = new Pokemon("Staraptor", 85, 120, 70, 50, 50, 100, Types.Flying, Types.Normal, 172, 0)
+        {
+            LearnedMoves = { Move.CloseCombat, Move.BraveBird, Move.AerialAce }
+        };
+        public static Pokemon Staravia = new Pokemon("Staravia", 55, 75, 50, 40, 40, 80, Types.Flying, Types.Normal, 113, 34)
+        {
+            EvolutionStages = { Staraptor },
+            LearnedMoves = { Move.AerialAce, Move.WingAttack, Move.TakeDown }
+        };
+        public static Pokemon Starly = new Pokemon("Starly", 40, 55, 30, 30, 30, 60, Types.Flying, Types.Normal, 56, 14)
+        {
+            EvolutionStages = { Staravia, Staraptor },
+            LearnedMoves = { Move.WingAttack, Move.QuickAttack }
+        };
+
+
+
+
+
+
+
+
 
         // //Eevee Pokemon
         // public static Pokemon Vaporeon = new Pokemon("Vaporeon", 29, 15, 14, 13, Types.Water, Types.none, 196, 0);
@@ -473,125 +691,6 @@ namespace PokemonGame
         // public static Pokemon Espeon = new Pokemon("Espeon", 22, 19, 14, 17, Types.Psychic, Types.none, 197, 0);
         // public static Pokemon Umbreon = new Pokemon("Umbreon", 25, 12, 18, 13, Types.Dark, Types.none, 197, 0);
         // public static Pokemon Eevee = new Pokemon("Eevee", 21, 11, 12, 11, Types.Normal, Types.none, 92, 0);
-
-
-        // //*POKEMON MOVES SYSTEM*
-
-        // public void LearnMove(Move specifiedMove)
-        // {
-        //     this.LearnedMoves.Add(specifiedMove);
-        // }
-        // //AllPokemonMoves
-        // public static void InitializePokemonMoves()
-        // {
-
-        //     //Fire Type Pokemon
-        //     Charizard.LearnMove(Move.Flamethrower);
-        //     Charizard.LearnMove(Move.Fly);
-        //     Charizard.LearnMove(Move.DragonClaw);
-        //     Blaziken.LearnMove(Move.CloseCombat);
-        //     Blaziken.LearnMove(Move.Flamethrower);
-        //     Ninetales.LearnMove(Move.Flamethrower);
-        //     Ninetales.LearnMove(Move.FireFang);
-        //     Arcanine.LearnMove(Move.Flamethrower);
-        //     Arcanine.LearnMove(Move.FireFang);
-        //     Flareon.LearnMove(Move.Flamethrower);
-        //     Flareon.LearnMove(Move.QuickAttack);
-        //     //Water Type Pokemon
-        //     Gyarados.LearnMove(Move.AquaTail);
-        //     Gyarados.LearnMove(Move.Earthquake);
-        //     Gyarados.LearnMove(Move.Crunch);
-        //     Swampert.LearnMove(Move.Earthquake);
-        //     Swampert.LearnMove(Move.Waterfall);
-        //     Blastoise.LearnMove(Move.Earthquake);
-        //     Blastoise.LearnMove(Move.Waterfall);
-        //     Blastoise.LearnMove(Move.Crunch);
-        //     Vaporeon.LearnMove(Move.AquaTail);
-        //     Vaporeon.LearnMove(Move.Surf);
-        //     Vaporeon.LearnMove(Move.QuickAttack);
-        //     Greninja.LearnMove(Move.Waterfall);
-        //     Greninja.LearnMove(Move.Surf);
-        //     Greninja.LearnMove(Move.DarkPulse);
-        //     //Grass Type Pokemon
-        //     Venusaur.LearnMove(Move.PetalDance);
-        //     Chikorita.LearnMove(Move.PetalDance);
-        //     Tsareena.LearnMove(Move.TropKick);
-        //     Tsareena.LearnMove(Move.HighJumpKick);
-        //     Tsareena.LearnMove(Move.PlayRough);
-        //     //Steel Type Pokemon
-        //     Metagross.LearnMove(Move.Psychic);
-        //     Metagross.LearnMove(Move.Earthquake);
-        //     Metagross.LearnMove(Move.MeteorMash);
-        //     Metagross.LearnMove(Move.HammerArm);
-        //     Aggron.LearnMove(Move.IronHead);
-        //     Aggron.LearnMove(Move.Earthquake);
-        //     Aggron.LearnMove(Move.StoneEdge);
-        //     //Rock Type Pokemon
-        //     Tyranitar.LearnMove(Move.StoneEdge);
-        //     Tyranitar.LearnMove(Move.Earthquake);
-        //     Tyranitar.LearnMove(Move.Crunch);
-        //     //Ground Type Pokemon
-        //     Krookodile.LearnMove(Move.Crunch);
-        //     Krookodile.LearnMove(Move.Earthquake);
-        //     Golurk.LearnMove(Move.Earthquake);
-        //     Golurk.LearnMove(Move.PhantomForce);
-        //     //Ghost Type Pokemon
-        //     Gengar.LearnMove(Move.Psychic);
-        //     Gengar.LearnMove(Move.ShadowBall);
-        //     Gengar.LearnMove(Move.DarkPulse);
-        //     //Dark Type Pokemon
-        //     Umbreon.LearnMove(Move.DarkPulse);
-        //     Umbreon.LearnMove(Move.QuickAttack);
-        //     Zoroark.LearnMove(Move.DarkPulse);
-        //     //Psychic Type Pokemon
-        //     Gardevoir.LearnMove(Move.MoonBlast);
-        //     Gardevoir.LearnMove(Move.Psychic);
-        //     Gardevoir.LearnMove(Move.ShadowBall);
-        //     Gallade.LearnMove(Move.Psychic);
-        //     Gallade.LearnMove(Move.CloseCombat);
-        //     Alakazam.LearnMove(Move.Psychic);
-        //     Alakazam.LearnMove(Move.ShadowBall);
-        //     Espeon.LearnMove(Move.Psychic);
-        //     Espeon.LearnMove(Move.QuickAttack);
-        //     //Fighting Type Pokemon
-        //     Lucario.LearnMove(Move.CloseCombat);
-        //     Lucario.LearnMove(Move.IronHead);
-        //     Machamp.LearnMove(Move.CloseCombat);
-        //     Machamp.LearnMove(Move.HammerArm);
-        //     Machamp.LearnMove(Move.StoneEdge);
-        //     //Flying Type Pokemon
-        //     Staraptor.LearnMove(Move.Fly);
-        //     Staraptor.LearnMove(Move.BraveBird);
-        //     Staraptor.LearnMove(Move.CloseCombat);
-        //     Staraptor.LearnMove(Move.QuickAttack);
-        //     //Normal Type Pokemon
-        //     Snorlax.LearnMove(Move.BodySlam);
-        //     Snorlax.LearnMove(Move.Crunch);
-        //     Eevee.LearnMove(Move.QuickAttack);
-        //     Eevee.LearnMove(Move.PlayRough);
-        //     //Electric Type Pokemon
-        //     Pikachu.LearnMove(Move.Thunderbolt);
-        //     Jolteon.LearnMove(Move.Thunderbolt);
-        //     Jolteon.LearnMove(Move.QuickAttack);
-        //     Luxray.LearnMove(Move.Thunderbolt);
-        //     Luxray.LearnMove(Move.Crunch);
-        //     //Dragon Type Pokemon
-        //     Garchomp.LearnMove(Move.DragonClaw);
-        //     Garchomp.LearnMove(Move.Earthquake);
-        //     Dragonite.LearnMove(Move.DragonClaw);
-        //     Dragonite.LearnMove(Move.DragonPulse);
-        //     Dragonite.LearnMove(Move.Fly);
-        //     //Fairy Type Pokemon
-        //     Sylveon.LearnMove(Move.PlayRough);
-        //     Sylveon.LearnMove(Move.MoonBlast);
-        //     Sylveon.LearnMove(Move.QuickAttack);
-        // }
-
-
-
-
-
-
 
 
     }
