@@ -1,13 +1,12 @@
 ﻿
+using System.Security.Cryptography;
 using PokemonGame;
 
 public class ActualGame
 {       
         
     static void Main(string[] args)
-    {
-
-        Pokemon.InitializePokemonMoves();
+    {        
         Types.InitializeWeaknesses();
         Trainer.InitializeNPTrainers();
         Console.Beep();

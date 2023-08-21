@@ -268,9 +268,9 @@ namespace PokemonGame
         public static void InitializeNPTrainers()
         {
             Steve.AddNPPokemon(Pokemon.Ninetales, 5);
-            Steve.AddNPPokemon(Pokemon.Golurk, 5);
+            Steve.AddNPPokemon(Pokemon.Growlithe, 5);
 
-            Alex.AddNPPokemon(Pokemon.Espeon, 6);
+            Alex.AddNPPokemon(Pokemon.Bulbasaur, 6);
         }
 
 

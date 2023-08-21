@@ -120,9 +120,7 @@ namespace PokemonGame
                 {
                     HPUpdate();
                     Console.WriteLine($"\n*{ActivePokemon[0].pokeName}'s Turn*");
-                    ShowMoves();
-
-    
+                    ShowMoves();    
                     ActivePokemon[0].Attack(ActivePokemon[1]);
 
 
@@ -157,9 +155,8 @@ namespace PokemonGame
                 }
                 else
                 {
-                    //Victory Statement
-                    Console.WriteLine();
-                    Console.WriteLine("---------------------------------------------------------------------------");
+                    //Victory Statement                    
+                    Console.WriteLine("\n---------------------------------------------------------------------------");
                     Console.WriteLine($"{ActivePokemon[0].ownerTrainer} has won the battle!");
                     Console.WriteLine("---------------------------------------------------------------------------");
                     Console.WriteLine($"The duel between {BattlingTrainers[0].trainerName} and {BattlingTrainers[1].trainerName} has concluded");
@@ -192,5 +189,7 @@ namespace PokemonGame
 
             }
         }
+
+
     }
 }
