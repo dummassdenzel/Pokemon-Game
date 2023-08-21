@@ -22,12 +22,12 @@ namespace PokemonGame
                     Trainer.ShowAllPlayers();
                     Console.Write("\nWho do you wish to play as?: ");
                     string? playerName = Console.ReadLine();
-                    for (int i = 0; i < Trainer.Players.Count; i++)
+                    for (int i = 0; i < Trainer.MainTrainers.Count; i++)
                     {
-                        if (playerName?.ToLower() == Trainer.Players[i].trainerName.ToLower())
+                        if (playerName?.ToLower() == Trainer.MainTrainers[i].trainerName.ToLower())
                         {
                             playerExists = true;
-                            currentPlayer.Add(Trainer.Players[i]);
+                            currentPlayer.Add(Trainer.MainTrainers[i]);
                             Console.Clear();
                             Console.Beep();
                             Console.WriteLine($"Current Trainer: {currentPlayer[0].trainerName}\n");
@@ -67,7 +67,7 @@ namespace PokemonGame
                         //Challenge a Trainer
                         case "challenge a trainer" or "2":
                             Console.Clear();
-                            Trainer.ShowAllTrainers();
+                            ShowAllTrainers();
                             currentPlayer[0].Challenge();
                             showmenu = false;
                             break;
@@ -96,7 +96,7 @@ namespace PokemonGame
                         //Shows all Trainers
                         case "show all trainers" or "6":
                             Console.Clear();
-                            Trainer.ShowAllTrainers();
+                            ShowAllTrainers();
                             Console.WriteLine("--------------------");
                             Console.Beep();
                             showmenu = false;
@@ -177,10 +177,12 @@ namespace PokemonGame
                     case "lesbian":
                     case "bi":
                     case "bisexual":
+                        Console.Clear();
                         Console.WriteLine("Sorry, please enter only your biological gender...");
                         continue;
 
                     default:
+                        Console.Clear();
                         Console.WriteLine("Please answer the question properly.");
                         continue;
                 }
@@ -202,16 +204,18 @@ namespace PokemonGame
                 bool alreadyExists = false;
                 if (string.IsNullOrEmpty(newcharname))
                 {
+                    Console.Clear();
                     Console.WriteLine("Please enter a valid name.\n");
                 }
                 else
                 {
-                    for (int i = 0; i < Trainer.Players.Count; i++)
+                    for (int i = 0; i < Trainer.MainTrainers.Count; i++)
                     {
-                        if (Trainer.Players[i] != null && newcharname != null &&
-                            newcharname.ToLower() == Trainer.Players[i].trainerName?.ToLower())
+                        if (Trainer.MainTrainers[i] != null && newcharname != null &&
+                            newcharname.ToLower() == Trainer.MainTrainers[i].trainerName?.ToLower())
                         {
-                            Console.WriteLine("\nSorry, that trainer already exists.\n");
+                            Console.Clear();
+                            Console.WriteLine("Sorry, that trainer already exists.\n");
                             alreadyExists = true;
                             break;
                         }
@@ -227,6 +231,7 @@ namespace PokemonGame
                         newcharname?.ToLower().Contains("fuck") == true ||
                         newcharname?.ToLower().Contains("tangina") == true)
                     {
+                        Console.Clear();
                         Console.WriteLine("How rude! Please enter a proper name.\n");
                         newcharname = null; //Reset the name and continue the loop
                         continue;
@@ -250,19 +255,22 @@ namespace PokemonGame
                 if (createchar?.ToLower().Contains("yes") == true)
                 {
                     Console.Beep();
-                    Console.WriteLine("\nUnderstood!\n");
+                    Console.Clear();
+                    Console.WriteLine("Understood!\n");
 
 
                     //CHARACTER CUSTOMIZATION PHASE 1
 
-                    string yourCharGender = enterYourGender();
+                    char yourCharGender = char.Parse(enterYourGender());
+                    Console.Clear();
                     string yourCharName = enterYourName();
 
 
                     //CHARACTER CUSTOMIZATION PHASE 2
 
                     Console.Clear();
-                    Trainer newTrainer = new Trainer(yourCharName, yourCharGender, true);
+                    Trainer newTrainer = new Trainer(yourCharName, yourCharGender);
+                    Console.WriteLine($"Congratulations! You can now begin your journey, {yourCharName}!");
                     break;
                     //End of Character Creation : "Yes"                
                 }
@@ -287,13 +295,13 @@ namespace PokemonGame
         //Start your Journey
         public static void StartJourney()
         {
-            Trainer Denzel = new Trainer("Denzel", "m", true);
-            Trainer Adrian = new Trainer("Adrian", "m", true);
-            Trainer Dominic = new Trainer("Dominic", "m", true);
-            Trainer Shawn = new Trainer("Shawn", "m", true);
-            Trainer Vince = new Trainer("Vince", "m", true);
-            Trainer Iverson = new Trainer("Iverson", "m", true);
-            Trainer AJ = new Trainer("AJ", "m", true);
+            Trainer Denzel = new Trainer("Denzel", 'm');
+            Trainer Adrian = new Trainer("Adrian", 'm');
+            Trainer Dominic = new Trainer("Dominic", 'm');
+            Trainer Shawn = new Trainer("Shawn", 'm');
+            Trainer Vince = new Trainer("Vince", 'm');
+            Trainer Iverson = new Trainer("Iverson", 'm');
+            Trainer AJ = new Trainer("AJ", 'm');
             Console.Clear();
             Console.WriteLine("---------------------------------------------------------------------------");
             Console.WriteLine("Press any key to Start your journey...");
@@ -329,6 +337,34 @@ namespace PokemonGame
             Console.WriteLine("*Enter 'none' if you wish to go back to choosing an Action.*\n");
         }
 
+        public static void ShowAllTrainers()
+        {
+            Console.WriteLine("\nList of Playable Trainers: ");
+            foreach (var item in Trainer.MainTrainers)
+            {
+                if (item.Team.Count == 0)
+                    Console.WriteLine($"{item.trainerName} - (No Pokemon)");
+                else
+                {
+                    Console.WriteLine($"{item.trainerName} - Pokemon: {item.Team.Count}/6");
+                }
+            }
+            Console.WriteLine("--------------------");
+            Console.WriteLine("List of Nearby Trainers: ");
+            foreach (var item in NPTrainer.NPTrainers)
+            {
+                if (item.isPlayer == false)
+                {
+                    if (item.Team.Count == 0)
+                        Console.WriteLine($"{item.trainerName} - (No Pokemon)");
+                    else
+                    {
+                        Console.WriteLine($"{item.trainerName} - Pokemon: {item.Team.Count}/6");
+                    }
+                }
+            }
+            Console.WriteLine();
+        }
 
 
 

@@ -4,8 +4,6 @@ namespace PokemonGame
     public class Battle
     {
 
-        public static List<Pokemon> ActivePokemon = new List<Pokemon>();
-        public static List<Trainer> BattlingTrainers = new List<Trainer>();
 
         //Turn-Based Battle System
         public static void EndTurn()
@@ -70,6 +68,8 @@ namespace PokemonGame
 
         //POKEMON BATTLE SYSTEM - by yours truly
 
+        public static List<Pokemon> ActivePokemon = new List<Pokemon>();
+        public static List<Trainer> BattlingTrainers = new List<Trainer>();
         public static void PokemonBattle()
         {
             //Print Team of Both Players

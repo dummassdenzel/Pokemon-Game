@@ -5,66 +5,24 @@ namespace PokemonGame
     public class Trainer
     {
         public string trainerName;
-        public string gender;
+        public char gender;
         public List<Pokemon> Team = new List<Pokemon>();
         public List<Pokemon> battlingTeam = new List<Pokemon>();
         public bool isPlayer;
 
 
-        //Arrays for Trainers
-        public static List<Trainer> Players = new List<Trainer>();
+        public static List<Trainer> MainTrainers = new List<Trainer>();
         public static List<Trainer> Trainers = new List<Trainer>();
-
-        //CONSTRUCTOR
-        public Trainer(string thistrainername, string thisgender, bool isPlayer)
+        public Trainer(string thistrainername, char thisgender)
         {
             this.trainerName = thistrainername;
             this.gender = thisgender;
-            this.isPlayer = isPlayer;
+            // this.isPlayer = isPlayer;
+            MainTrainers.Add(this);          
             Trainers.Add(this);
-
-            if (isPlayer == true)
-            {
-                Players.Add(this);
-                Console.WriteLine($"Congratulations! You can now begin your journey, {trainerName}!");
-            }
         }
 
-        //Show All Trainers
-        public static void ShowAllTrainers()
-        {
-            Console.WriteLine("\nList of Playable Trainers: ");
-            foreach (var item in Players)
-            {
-                if (item.Team.Count == 0)
-                    Console.WriteLine($"{item.trainerName} - (No Pokemon)");
-                else
-                {
-                    Console.WriteLine($"{item.trainerName} - Pokemon: {item.Team.Count}/6");
-                }
-            }
-            Console.WriteLine("--------------------");
-            Console.WriteLine("List of Nearby Trainers: ");
-            foreach (var item in Trainers)
-            {
-                if (item.isPlayer == false)
-                {
-                    if (item.Team.Count == 0)
-                        Console.WriteLine($"{item.trainerName} - (No Pokemon)");
-                    else
-                    {
-                        Console.WriteLine($"{item.trainerName} - Pokemon: {item.Team.Count}/6");
-                    }
-                }
-            }
-            Console.WriteLine();
-        }
-
-
-
-
-        //*CATCHING SYSTEM*
-
+        
 
         //Catch a Pokemon
         public void Catch()
@@ -113,9 +71,9 @@ namespace PokemonGame
         }
 
 
-        //Show a player's Team
+        //Show current Trainer's Team
         public void ShowTeam()
-        {   
+        {
             Console.WriteLine("---------------------------------------------------------------------------");
             Console.WriteLine($"{trainerName}'s Team:");
             foreach (var item in Team)
@@ -136,11 +94,11 @@ namespace PokemonGame
         }
 
 
-        //Shows All Challengable Trainers
+        //Shows All Main Trainers
         public static void ShowAllPlayers()
         {
             Console.WriteLine("\nMain Trainers: ");
-            foreach (var item in Players)
+            foreach (var item in MainTrainers)
             {
                 if (item.Team.Count == 0)
                     Console.WriteLine($"{item.trainerName} - (No Pokemon)");
@@ -149,9 +107,6 @@ namespace PokemonGame
                     Console.WriteLine($"{item.trainerName} - Pokemon: {item.Team.Count}/6");
                 }
             }
-            // Console.WriteLine("--------------------");
-            // Console.WriteLine("Nearby Trainers:");
-
             Console.WriteLine();
         }
 
@@ -248,30 +203,6 @@ namespace PokemonGame
 
 
 
-
-
-        //*NON-PLAYER TRAINERS*
-
-        public static Trainer Steve = new Trainer("Steve", "m", false);
-        public static Trainer Alex = new Trainer("Alex", "f", false);
-
-
-        private void AddNPPokemon(Pokemon pokemon, int level)
-        {
-            Pokemon NPpokemon = pokemon;
-            NPpokemon.ownerTrainer = this.trainerName;
-            NPpokemon.pokelevel = level;
-            this.Team.Add(NPpokemon);
-        }
-
-
-        public static void InitializeNPTrainers()
-        {
-            Steve.AddNPPokemon(Pokemon.Ninetales, 5);
-            Steve.AddNPPokemon(Pokemon.Growlithe, 5);
-
-            Alex.AddNPPokemon(Pokemon.Bulbasaur, 6);
-        }
 
 
     }

@@ -25,13 +25,9 @@ namespace PokemonGame
         public int evolvelevel;
         public bool canEvolve()
         {
-            if (pokelevel >= evolvelevel)
+            if (pokelevel >= evolvelevel && EvolutionStages.Count != 0)
             {
                 return true;
-            }
-            else if (evolvelevel == 0)
-            {
-                return false;
             }
             else
             {
@@ -283,7 +279,7 @@ namespace PokemonGame
             EvolutionStages = { Meganium },
             LearnedMoves = { Move.EnergyBall, Move.Stomp }
         };
-        public static Pokemon Chikorita = new Pokemon("Chikorita", 45, 49, 65, 49, 65, 49, Types.Grass, Types.none, 64, 16)
+        public static Pokemon Chikorita = new Pokemon("Chikorita", 45, 209, 65, 49, 65, 49, Types.Grass, Types.none, 64, 16)
         {
             EvolutionStages = { Bayleef, Meganium },
             LearnedMoves = { Move.RazorLeaf, Move.Tackle }
@@ -418,10 +414,10 @@ namespace PokemonGame
             EvolutionStages = { Luxray },
             LearnedMoves = { Move.Spark, Move.Bite, Move.Tackle }
         };
-        public static Pokemon Shinx = new Pokemon("Shinx", 80, 120, 79, 95, 79, 70, Types.Electric, Types.none, 194, 15)
+        public static Pokemon Shinx = new Pokemon("Shinx", 45, 65, 34, 40, 34, 45, Types.Electric, Types.none, 60, 15)
         {
             EvolutionStages = { Luxio, Luxray },
-            LearnedMoves = { Move.Thunderbolt, Move.Crunch, Move.Tackle }
+            LearnedMoves = { Move.Spark, Move.Tackle}
         };
 
 

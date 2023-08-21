@@ -14,7 +14,7 @@ namespace PokemonGame
             type = thistype;
         }
 
-        public static Types Normal = new Types("Normal");
+        public static Types Normal = new Types("Normal"){};
         public static Types Fire = new Types("Fire");
         public static Types Water = new Types("Water");
         public static Types Grass = new Types("Grass");
@@ -34,161 +34,141 @@ namespace PokemonGame
         public static Types Fairy = new Types("Fairy");
         public static Types none = new Types("none");
 
-        public void AddResistance(Types strengths)
-        {
-            this.Resistances.Add(strengths);
+        static Types(){
+            Normal.Weaknesses.Add(Fighting);
+            Normal.Immunities.Add(Ghost);
+
+            Fire.Resistances.Add(Grass);
+            Fire.Resistances.Add(Bug);
+            Fire.Resistances.Add(Ice);
+            Fire.Resistances.Add(Fire);
+            Fire.Resistances.Add(Steel);
+            Fire.Weaknesses.Add(Water);
+            Fire.Weaknesses.Add(Ground);
+            Fire.Weaknesses.Add(Rock);
+
+            Water.Resistances.Add(Fire);
+            Water.Resistances.Add(Ice);
+            Water.Resistances.Add(Steel);
+            Water.Resistances.Add(Water);
+            Water.Weaknesses.Add(Electric);
+            Water.Weaknesses.Add(Grass);
+
+            Grass.Resistances.Add(Water);
+            Grass.Resistances.Add(Ground);
+            Grass.Resistances.Add(Electric);
+            Grass.Resistances.Add(Grass);
+            Grass.Weaknesses.Add(Bug);
+            Grass.Weaknesses.Add(Fire);
+            Grass.Weaknesses.Add(Flying);
+            Grass.Weaknesses.Add(Ice);
+            Grass.Weaknesses.Add(Poison);
+
+            Electric.Resistances.Add(Water);
+            Electric.Resistances.Add(Flying);
+            Electric.Resistances.Add(Steel);
+            Electric.Immunities.Add(Ground);
+
+            Psychic.Resistances.Add(Fighting);
+            Psychic.Resistances.Add(Psychic);
+            Psychic.Weaknesses.Add(Ghost);
+            Psychic.Weaknesses.Add(Dark);
+            Psychic.Weaknesses.Add(Bug);
+
+            Ice.Resistances.Add(Ice);            
+            Ice.Weaknesses.Add(Fire);
+            Ice.Weaknesses.Add(Fighting);
+            Ice.Weaknesses.Add(Rock);
+            Ice.Weaknesses.Add(Steel);
+
+            Dragon.Resistances.Add(Electric);
+            Dragon.Resistances.Add(Fire);
+            Dragon.Resistances.Add(Grass);
+            Dragon.Resistances.Add(Water);
+            Dragon.Weaknesses.Add(Dragon);
+            Dragon.Weaknesses.Add(Ice);
+
+            Dark.Resistances.Add(Dark);
+            Dark.Resistances.Add(Ghost);
+            Dark.Weaknesses.Add(Fighting);
+            Dark.Weaknesses.Add(Bug);
+            Dark.Weaknesses.Add(Fairy);
+            Dark.Immunities.Add(Psychic);
+
+            Fairy.Resistances.Add(Bug);
+            Fairy.Resistances.Add(Dark);
+            Fairy.Resistances.Add(Fighting);
+            Fairy.Weaknesses.Add(Poison);
+            Fairy.Weaknesses.Add(Steel);
+            Fairy.Immunities.Add(Dragon);
+
+            Fighting.Resistances.Add(Bug);
+            Fighting.Resistances.Add(Dark);
+            Fighting.Resistances.Add(Rock);
+            Fighting.Weaknesses.Add(Flying);
+            Fighting.Weaknesses.Add(Psychic);
+
+            Flying.Resistances.Add(Bug);
+            Flying.Resistances.Add(Fighting);
+            Flying.Resistances.Add(Grass);
+            Flying.Weaknesses.Add(Electric);
+            Flying.Weaknesses.Add(Ice);
+            Flying.Weaknesses.Add(Rock);
+            Flying.Immunities.Add(Ground);
+
+            Poison.Resistances.Add(Bug);
+            Poison.Resistances.Add(Poison);
+            Poison.Resistances.Add(Fighting);
+            Poison.Resistances.Add(Grass);
+            Poison.Resistances.Add(Fairy);
+            Poison.Weaknesses.Add(Ground);
+            Poison.Weaknesses.Add(Psychic);
+
+            Ground.Resistances.Add(Rock);
+            Ground.Resistances.Add(Poison);
+            Ground.Weaknesses.Add(Grass);
+            Ground.Weaknesses.Add(Ice);
+            Ground.Weaknesses.Add(Water);
+            Ground.Immunities.Add(Electric);
+
+            Rock.Resistances.Add(Fire);
+            Rock.Resistances.Add(Normal);
+            Rock.Resistances.Add(Flying);
+            Rock.Resistances.Add(Poison);
+            Rock.Weaknesses.Add(Fighting);
+            Rock.Weaknesses.Add(Grass);
+            Rock.Weaknesses.Add(Ground);
+            Rock.Weaknesses.Add(Water);
+
+            Bug.Resistances.Add(Fighting);
+            Bug.Resistances.Add(Grass);
+            Bug.Resistances.Add(Ground);
+            Bug.Weaknesses.Add(Fire);
+            Bug.Weaknesses.Add(Rock);
+            Bug.Weaknesses.Add(Flying);
+
+            Ghost.Resistances.Add(Bug);
+            Ghost.Resistances.Add(Poison);
+            Ghost.Weaknesses.Add(Dark);
+            Ghost.Weaknesses.Add(Ghost);
+            Ghost.Immunities.Add(Normal);
+            Ghost.Immunities.Add(Fighting);
+
+            Steel.Resistances.Add(Bug);
+            Steel.Resistances.Add(Dark);
+            Steel.Resistances.Add(Dragon);
+            Steel.Resistances.Add(Flying);
+            Steel.Resistances.Add(Ghost);
+            Steel.Resistances.Add(Grass);
+            Steel.Resistances.Add(Ice);
+            Steel.Resistances.Add(Normal);
+            Steel.Resistances.Add(Psychic);
+            Steel.Resistances.Add(Rock); 
+            Steel.Resistances.Add(Steel);  
+            Steel.Weaknesses.Add(Fire);
+            Steel.Weaknesses.Add(Fighting);
+            Steel.Weaknesses.Add(Ground);  
         }
-        public void AddWeakness(Types weaknesses)
-        {
-            this.Weaknesses.Add(weaknesses);
-        }
-        public void AddImmunity(Types weaknesses)
-        {
-            this.Immunities.Add(weaknesses);
-        }
-        public static void InitializeWeaknesses()
-        {
-            
-            Normal.AddWeakness(Fighting);
-            Normal.AddImmunity(Ghost);
-
-            Fire.AddResistance(Grass);
-            Fire.AddResistance(Bug);
-            Fire.AddResistance(Ice);
-            Fire.AddResistance(Fire);
-            Fire.AddResistance(Steel);
-            Fire.AddWeakness(Water);
-            Fire.AddWeakness(Ground);
-            Fire.AddWeakness(Rock);
-
-            Water.AddResistance(Fire);
-            Water.AddResistance(Ice);
-            Water.AddResistance(Steel);
-            Water.AddResistance(Water);
-            Water.AddWeakness(Electric);
-            Water.AddWeakness(Grass);
-
-            Grass.AddResistance(Water);
-            Grass.AddResistance(Ground);
-            Grass.AddResistance(Electric);
-            Grass.AddResistance(Grass);
-            Grass.AddWeakness(Bug);
-            Grass.AddWeakness(Fire);
-            Grass.AddWeakness(Flying);
-            Grass.AddWeakness(Ice);
-            Grass.AddWeakness(Poison);
-
-            Electric.AddResistance(Water);
-            Electric.AddResistance(Flying);
-            Electric.AddResistance(Steel);
-            Electric.AddImmunity(Ground);
-
-            Psychic.AddResistance(Fighting);
-            Psychic.AddResistance(Psychic);
-            Psychic.AddWeakness(Ghost);
-            Psychic.AddWeakness(Dark);
-            Psychic.AddWeakness(Bug);
-
-            Ice.AddResistance(Ice);            
-            Ice.AddWeakness(Fire);
-            Ice.AddWeakness(Fighting);
-            Ice.AddWeakness(Rock);
-            Ice.AddWeakness(Steel);
-
-            Dragon.AddResistance(Electric);
-            Dragon.AddResistance(Fire);
-            Dragon.AddResistance(Grass);
-            Dragon.AddResistance(Water);
-            Dragon.AddWeakness(Dragon);
-            Dragon.AddWeakness(Ice);
-
-            Dark.AddResistance(Dark);
-            Dark.AddResistance(Ghost);
-            Dark.AddWeakness(Fighting);
-            Dark.AddWeakness(Bug);
-            Dark.AddWeakness(Fairy);
-            Dark.AddImmunity(Psychic);
-
-            Fairy.AddResistance(Bug);
-            Fairy.AddResistance(Dark);
-            Fairy.AddResistance(Fighting);
-            Fairy.AddWeakness(Poison);
-            Fairy.AddWeakness(Steel);
-            Fairy.AddImmunity(Dragon);
-
-            Fighting.AddResistance(Bug);
-            Fighting.AddResistance(Dark);
-            Fighting.AddResistance(Rock);
-            Fighting.AddWeakness(Flying);
-            Fighting.AddWeakness(Psychic);
-
-            Flying.AddResistance(Bug);
-            Flying.AddResistance(Fighting);
-            Flying.AddResistance(Grass);
-            Flying.AddWeakness(Electric);
-            Flying.AddWeakness(Ice);
-            Flying.AddWeakness(Rock);
-            Flying.AddImmunity(Ground);
-
-            Poison.AddResistance(Bug);
-            Poison.AddResistance(Poison);
-            Poison.AddResistance(Fighting);
-            Poison.AddResistance(Grass);
-            Poison.AddResistance(Fairy);
-            Poison.AddWeakness(Ground);
-            Poison.AddWeakness(Psychic);
-
-            Ground.AddResistance(Rock);
-            Ground.AddResistance(Poison);
-            Ground.AddWeakness(Grass);
-            Ground.AddWeakness(Ice);
-            Ground.AddWeakness(Water);
-            Ground.AddImmunity(Electric);
-
-            Rock.AddResistance(Fire);
-            Rock.AddResistance(Normal);
-            Rock.AddResistance(Flying);
-            Rock.AddResistance(Poison);
-            Rock.AddWeakness(Fighting);
-            Rock.AddWeakness(Grass);
-            Rock.AddWeakness(Ground);
-            Rock.AddWeakness(Water);
-
-            Bug.AddResistance(Fighting);
-            Bug.AddResistance(Grass);
-            Bug.AddResistance(Ground);
-            Bug.AddWeakness(Fire);
-            Bug.AddWeakness(Rock);
-            Bug.AddWeakness(Flying);
-
-            Ghost.AddResistance(Bug);
-            Ghost.AddResistance(Poison);
-            Ghost.AddWeakness(Dark);
-            Ghost.AddWeakness(Ghost);
-            Ghost.AddImmunity(Normal);
-            Ghost.AddImmunity(Fighting);
-
-            Steel.AddResistance(Bug);
-            Steel.AddResistance(Dark);
-            Steel.AddResistance(Dragon);
-            Steel.AddResistance(Flying);
-            Steel.AddResistance(Ghost);
-            Steel.AddResistance(Grass);
-            Steel.AddResistance(Ice);
-            Steel.AddResistance(Normal);
-            Steel.AddResistance(Psychic);
-            Steel.AddResistance(Rock); 
-            Steel.AddResistance(Steel);  
-            Steel.AddWeakness(Fire);
-            Steel.AddWeakness(Fighting);
-            Steel.AddWeakness(Ground);          
-
-        }
-
-
-
-
+        
     }
-
-
 }
