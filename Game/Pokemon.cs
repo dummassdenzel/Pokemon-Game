@@ -48,8 +48,7 @@ namespace PokemonGame
         public static List<Pokemon> AllPokemon = new List<Pokemon>();
         public static int pokeIDPool = 1;
         public Pokemon(string thisname, int thishp, int thisatk, int thisdef, int thisspatk, int thisspdef, int thisspeed, Types thistype1, Types thistype2, int thisexpy, int thisevolvelevel)
-        {   
-            // PokeID = pokeIDPool;
+        {
             PokeName = thisname;
             hp = thishp;
             atk = thisatk;
@@ -64,8 +63,7 @@ namespace PokemonGame
             evolvelevel = thisevolvelevel;
 
             totalExp = Math.Pow(pokelevel, 3);
-            AllPokemon.Add(this); 
-            // pokeIDPool++;           
+            AllPokemon.Add(this);
         }
 
         //Attack for Battle
@@ -85,16 +83,23 @@ namespace PokemonGame
                         Useable = true;
                         int movePower = LearnedMoves[i].moveBasePower;
                         int Effectiveness = 0;
-                        int AttackDMG;
+                        int AttackDMG = 0;
 
                         //SAME TYPE ATTACK BONUS
                         if (LearnedMoves[i].movetype == poketype1 || LearnedMoves[i].movetype == poketype2)
                         {
                             movePower = movePower + (movePower / 2);
                         }
-                        //DAMAGE CALCULATOR
-                        AttackDMG = (((2 * pokelevel) / 5 + 2) * movePower * atk / target.def) / 50 + 2;
 
+                        //DAMAGE CALCULATOR
+                        if (LearnedMoves[i].attackType == "Physical")
+                        {
+                            AttackDMG = (((2 * pokelevel) / 5 + 2) * movePower * atk / target.def) / 50 + 2;
+                        }
+                        if (LearnedMoves[i].attackType == "Special")
+                        {
+                            AttackDMG = (((2 * pokelevel) / 5 + 2) * movePower * spatk / target.spdef) / 50 + 2;
+                        }
 
 
                         //Resistances                        
@@ -321,7 +326,7 @@ namespace PokemonGame
             EvolutionStages = { Blaziken },
             LearnedMoves = { Move.Ember, Move.DoubleKick, Move.AerialAce }
         };
-        public static Pokemon Torchic = new Pokemon("Torchic", 45, 60, 40, 70, 50, 45, Types.Fire, Types.Fighting, 65, 16)
+        public static Pokemon Torchic = new Pokemon("Torchic", 45, 60, 40, 70, 50, 45, Types.Fire, Types.none, 65, 16)
         {
             EvolutionStages = { Combusken, Blaziken },
             LearnedMoves = { Move.Ember, Move.Scratch }

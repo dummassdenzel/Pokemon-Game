@@ -54,6 +54,7 @@ namespace PokemonGame
                     showmenu = true;
                     Console.WriteLine("---------------------------------------------------------------------------");
                     Console.Write($"What do you want to do, {currentPlayer[0].trainerName}?: ");
+                    
                     string? whatDoYouWannaDo = Console.ReadLine();
                     switch (whatDoYouWannaDo?.ToLower())
                     {
@@ -352,7 +353,18 @@ namespace PokemonGame
             }
             Console.WriteLine("--------------------");
             Console.WriteLine("List of Nearby Trainers: ");
-            foreach (var item in NPTrainer.NPTrainers)
+            foreach (var item in AllNPTrainers.NPTrainer.NPTrainers)
+            {
+                if (item.Team.Count == 0)
+                    Console.WriteLine($"{item.trainerName} - (No Pokemon)");
+                else
+                {
+                    Console.WriteLine($"{item.trainerName} - Pokemon: {item.Team.Count}/6");
+                }
+            }
+            Console.WriteLine("--------------------");
+            Console.WriteLine("Gym Leaders: ");
+            foreach (var item in AllNPTrainers.GymLeader.GymLeaders)
             {
                 if (item.Team.Count == 0)
                     Console.WriteLine($"{item.trainerName} - (No Pokemon)");

@@ -8,7 +8,8 @@ namespace PokemonGame
         public char gender;
         public List<Pokemon> Team = new List<Pokemon>();
         public List<Pokemon> battlingTeam = new List<Pokemon>();
-        public bool hasNoElligiblePokemon
+        public bool isPlayer;
+        public bool HasNoElligiblePokemon
         {
             get
             {
@@ -22,7 +23,6 @@ namespace PokemonGame
                 }
             }
         }
-        public bool isPlayer;
 
 
         public static List<Trainer> MainTrainers = new List<Trainer>();
@@ -32,8 +32,11 @@ namespace PokemonGame
             trainerName = thistrainername;
             gender = thisgender;
             isPlayer = true;
-            MainTrainers.Add(this);
             Trainers.Add(this);
+            if (isPlayer == true)
+            {
+                MainTrainers.Add(this);
+            }
         }
 
         public void Catch(Pokemon? pokemon)
