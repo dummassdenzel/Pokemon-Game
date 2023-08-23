@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\J.A.R.V.I.S\\knowledge\\Classes\\PokemonGame.csproj": {}
+    "C:\\Users\\J.A.R.V.I.S\\knowledge\\classes\\PokemonGame.csproj": {}
   },
   "projects": {
-    "C:\\Users\\J.A.R.V.I.S\\knowledge\\Classes\\PokemonGame.csproj": {
+    "C:\\Users\\J.A.R.V.I.S\\knowledge\\classes\\PokemonGame.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\J.A.R.V.I.S\\knowledge\\Classes\\PokemonGame.csproj",
+        "projectUniqueName": "C:\\Users\\J.A.R.V.I.S\\knowledge\\classes\\PokemonGame.csproj",
         "projectName": "PokemonGame",
-        "projectPath": "C:\\Users\\J.A.R.V.I.S\\knowledge\\Classes\\PokemonGame.csproj",
+        "projectPath": "C:\\Users\\J.A.R.V.I.S\\knowledge\\classes\\PokemonGame.csproj",
         "packagesPath": "C:\\Users\\J.A.R.V.I.S\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\J.A.R.V.I.S\\knowledge\\Classes\\obj\\",
+        "outputPath": "C:\\Users\\J.A.R.V.I.S\\knowledge\\classes\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Users\\J.A.R.V.I.S\\AppData\\Roaming\\Godot\\mono\\GodotNuGetFallbackFolder",

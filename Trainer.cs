@@ -8,6 +8,20 @@ namespace PokemonGame
         public char gender;
         public List<Pokemon> Team = new List<Pokemon>();
         public List<Pokemon> battlingTeam = new List<Pokemon>();
+        public bool hasNoElligiblePokemon
+        {
+            get
+            {
+                if (Team.All(pokemon => pokemon.combathp == 0))
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+        }
         public bool isPlayer;
 
 
@@ -15,58 +29,72 @@ namespace PokemonGame
         public static List<Trainer> Trainers = new List<Trainer>();
         public Trainer(string thistrainername, char thisgender)
         {
-            this.trainerName = thistrainername;
-            this.gender = thisgender;
-            // this.isPlayer = isPlayer;
-            MainTrainers.Add(this);          
+            trainerName = thistrainername;
+            gender = thisgender;
+            isPlayer = true;
+            MainTrainers.Add(this);
             Trainers.Add(this);
         }
 
-        
+        public void Catch(Pokemon? pokemon)
+        {
+            if (pokemon == null)
+            {
+                Console.WriteLine("Invalid Pokemon.");
+                return;
+            }
+
+            Pokemon newPokemon = new Pokemon(
+                pokemon.PokeName,
+                pokemon.hp,
+                pokemon.atk,
+                pokemon.def,
+                pokemon.spatk,
+                pokemon.spdef,
+                pokemon.speed,
+                pokemon.poketype1,
+                pokemon.poketype2,
+                pokemon.expYield,
+                pokemon.evolvelevel
+            );
+            newPokemon.LearnedMoves.AddRange(pokemon.LearnedMoves);
+            Team.Add(newPokemon);
+            newPokemon.ownerTrainer = this.trainerName;
+            newPokemon.PokeID = Pokemon.pokeIDPool;
+            Pokemon.pokeIDPool++;
+
+            Console.Clear();
+            Console.WriteLine($"Congratulations {trainerName}, you've successfully caught {newPokemon.PokeName}[Lv.{newPokemon.pokelevel}].");
+            Console.WriteLine($"Its stats are: HP:{newPokemon.hp} Attack:{newPokemon.atk} Def:{newPokemon.def} Speed:{newPokemon.speed}\n");
+            Pokemon.AllPokemon.Remove(newPokemon);
+
+        }
 
         //Catch a Pokemon
-        public void Catch()
+        public void CatchPokemon()
         {
-            var isCatchable = false;
-            while (isCatchable == false)
+            Pokemon.ShowAllPokemon();
+            string? chosenPokemon = null;
+            while (string.IsNullOrEmpty(chosenPokemon))
             {
-                Pokemon.ShowAllPokemon();
                 Console.Write($"{trainerName} - Choose Pokemon to catch: ");
-                string? chosenPokemon = Console.ReadLine();
+                chosenPokemon = Console.ReadLine();
 
-                for (int i = 0; i < Pokemon.AllPokemon.Count; i++)
+                if (Pokemon.AllPokemon.Any(pokemon => pokemon.PokeName.ToLower() == chosenPokemon?.ToLower()))
                 {
-                    if (Pokemon.AllPokemon[i].pokeName.ToLower() == chosenPokemon?.ToLower() && Pokemon.AllPokemon[i].ownerTrainer == "none")
-                    {
-                        Console.Clear();
-                        Team.Add(Pokemon.AllPokemon[i]);
-                        Pokemon.AllPokemon[i].ownerTrainer = this.trainerName;
-                        Console.WriteLine($"Congratulations {trainerName}, you've successfully caught {Pokemon.AllPokemon[i].pokeName}[Lv.{Pokemon.AllPokemon[i].pokelevel}].");
-                        Console.WriteLine($"Its stats are: HP:{Pokemon.AllPokemon[i].hp} Attack:{Pokemon.AllPokemon[i].atk} Def:{Pokemon.AllPokemon[i].def} Speed:{Pokemon.AllPokemon[i].speed}\n");
-                        isCatchable = true;
-                        Console.Beep();
-
-                        break;
-                    }
-                    if (Pokemon.AllPokemon[i].pokeName == chosenPokemon && Pokemon.AllPokemon[i].ownerTrainer != "none")
-                    {
-                        Console.WriteLine("That Pokemon already has its Trainer!");
-                        continue;
-                    }
-                }
-
-                if (chosenPokemon == "none")
-                {
-                    isCatchable = true;
+                    Catch(Pokemon.AllPokemon.Find(pokemon => pokemon.PokeName.ToLower() == chosenPokemon?.ToLower()));
                     break;
                 }
-
-                if (isCatchable == false)
+                if (chosenPokemon == "none")
+                {
+                    Console.Clear();
+                    break;
+                }
+                else
                 {
                     Console.WriteLine("Please select a catchable Pokemon.");
-                    continue;
+                    chosenPokemon = null;
                 }
-
             }
         }
 
@@ -80,14 +108,14 @@ namespace PokemonGame
             {
                 if (item.combathp > 0)
                 {
-                    Console.WriteLine($"[Lv. {item.pokelevel}] {item.pokeName} - HP: {item.combathp}/{item.hp}");
+                    Console.WriteLine($"[ID No.{item.PokeID}] [Lv. {item.pokelevel}] {item.PokeName} - HP: {item.combathp}/{item.hp}");
                 }
                 else
                 {
-                    Console.WriteLine($"[Lv. {item.pokelevel}] {item.pokeName} - HP: *Fainted*");
+                    Console.WriteLine($"[ID No.{item.PokeID}] [Lv. {item.pokelevel}] {item.PokeName} - HP: *Fainted*");
                 }
 
-                Console.WriteLine($"Atk:{item.atk} Def:{item.def} Speed:{item.speed}");
+                Console.WriteLine($"[Atk:{item.atk} Def:{item.def} Speed:{item.speed}]");
                 Console.WriteLine($"Total Exp Gained: {item.totalExp}\n");
             }
             Console.WriteLine("---------------------------------------------------------------------------\n");

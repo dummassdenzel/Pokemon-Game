@@ -1,14 +1,14 @@
 namespace PokemonGame
 {
     public class NPTrainer : Trainer
-    {
+    {    
         public static List<NPTrainer> NPTrainers = new List<NPTrainer>();
         public NPTrainer(string thistrainername, char thisgender)
             : base(thistrainername, thisgender)
-        {
+        {   
+            isPlayer = false;
             NPTrainers.Add(this);
         }
-
 
         //ALL NP TRAINERS
         public static NPTrainer Steve = new NPTrainer("Steve", 'm');

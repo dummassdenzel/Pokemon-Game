@@ -61,7 +61,7 @@ namespace PokemonGame
                         //Catch a Pokemon
                         case "catch a pokemon" or "1":
                             Console.Clear();
-                            currentPlayer[0].Catch();
+                            currentPlayer[0].CatchPokemon();
                             break;
 
                         //Challenge a Trainer
@@ -114,6 +114,7 @@ namespace PokemonGame
                         //Shows all possible actions
                         case "h":
                             showAllActions();
+                            showmenu = false;
                             continue;
 
                         //End the Game
@@ -144,7 +145,7 @@ namespace PokemonGame
         }
 
         //CHARACTER CUSTOMIZATION: Gender*
-        public static string enterYourGender()
+        public static string EnterYourGender()
         {
 
             string? newchargender = null;
@@ -192,7 +193,7 @@ namespace PokemonGame
         }
 
         //CHARACTER CUSTOMIZATION: Name*
-        public static string enterYourName()
+        public static string EnterYourName()
         {
             //Enter your Name
             string? newcharname = null;
@@ -261,9 +262,9 @@ namespace PokemonGame
 
                     //CHARACTER CUSTOMIZATION PHASE 1
 
-                    char yourCharGender = char.Parse(enterYourGender());
+                    char yourCharGender = char.Parse(EnterYourGender());
                     Console.Clear();
-                    string yourCharName = enterYourName();
+                    string yourCharName = EnterYourName();
 
 
                     //CHARACTER CUSTOMIZATION PHASE 2
@@ -353,14 +354,11 @@ namespace PokemonGame
             Console.WriteLine("List of Nearby Trainers: ");
             foreach (var item in NPTrainer.NPTrainers)
             {
-                if (item.isPlayer == false)
+                if (item.Team.Count == 0)
+                    Console.WriteLine($"{item.trainerName} - (No Pokemon)");
+                else
                 {
-                    if (item.Team.Count == 0)
-                        Console.WriteLine($"{item.trainerName} - (No Pokemon)");
-                    else
-                    {
-                        Console.WriteLine($"{item.trainerName} - Pokemon: {item.Team.Count}/6");
-                    }
+                    Console.WriteLine($"{item.trainerName} - Pokemon: {item.Team.Count}/6");
                 }
             }
             Console.WriteLine();

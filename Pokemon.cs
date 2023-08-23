@@ -4,8 +4,8 @@ namespace PokemonGame
     public class Pokemon
     {
         //STATS
-        public int pokeID;
-        public string pokeName;
+        public int PokeID;
+        public string PokeName { get; set; }
         public int hp;
         public int combathp;
         public int atk;
@@ -23,29 +23,34 @@ namespace PokemonGame
         //EVOLUTION SYSTEM
         public List<Pokemon> EvolutionStages = new List<Pokemon>();
         public int evolvelevel;
-        public bool canEvolve()
+        public bool CanEvolve
         {
-            if (pokelevel >= evolvelevel && EvolutionStages.Count != 0)
+            get
             {
-                return true;
-            }
-            else
-            {
-                return false;
+                if (pokelevel >= evolvelevel && EvolutionStages.Count != 0)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
         }
-
         //BATTLE SYSTEM
         public string ownerTrainer = "none";
         public List<Move> LearnedMoves = new List<Move>();
         public List<Move> LearnableMoves = new List<Move>();
 
 
+
         //POKEMON CONSTRUCTOR       
         public static List<Pokemon> AllPokemon = new List<Pokemon>();
+        public static int pokeIDPool = 1;
         public Pokemon(string thisname, int thishp, int thisatk, int thisdef, int thisspatk, int thisspdef, int thisspeed, Types thistype1, Types thistype2, int thisexpy, int thisevolvelevel)
-        {
-            pokeName = thisname;
+        {   
+            // PokeID = pokeIDPool;
+            PokeName = thisname;
             hp = thishp;
             atk = thisatk;
             def = thisdef;
@@ -59,7 +64,8 @@ namespace PokemonGame
             evolvelevel = thisevolvelevel;
 
             totalExp = Math.Pow(pokelevel, 3);
-            AllPokemon.Add(this);
+            AllPokemon.Add(this); 
+            // pokeIDPool++;           
         }
 
         //Attack for Battle
@@ -90,7 +96,6 @@ namespace PokemonGame
                         AttackDMG = (((2 * pokelevel) / 5 + 2) * movePower * atk / target.def) / 50 + 2;
 
 
-                        //TYPE DAMAGE CALCULATOR
 
                         //Resistances                        
                         for (int rs1 = 0; rs1 < target.poketype1.Resistances.Count; rs1++)
@@ -139,7 +144,7 @@ namespace PokemonGame
                         }
                         Console.Clear();
                         Console.WriteLine("---------------------------------------------------------------------------");
-                        Console.WriteLine($"{pokeName} used {LearnedMoves[i].moveName}!");
+                        Console.WriteLine($"{PokeName} used {LearnedMoves[i].moveName}!");
 
                         switch (Effectiveness)
                         {
@@ -161,7 +166,7 @@ namespace PokemonGame
                                 break;
                             case -3:
                                 AttackDMG = 0;
-                                Console.WriteLine($"Oh no! {target.pokeName} was immune to the move!");
+                                Console.WriteLine($"Oh no! {target.PokeName} was immune to the move!");
                                 break;
 
                             default:
@@ -183,10 +188,11 @@ namespace PokemonGame
             }
         }
 
+        //Evolve System
         public void Evolve(Pokemon evolvedpokemon)
         {
-            string priorName = pokeName;
-            pokeName = evolvedpokemon.pokeName;
+            string priorName = PokeName;
+            PokeName = evolvedpokemon.PokeName;
             hp = evolvedpokemon.hp;
             atk = evolvedpokemon.atk;
             def = evolvedpokemon.def;
@@ -196,7 +202,8 @@ namespace PokemonGame
             expYield = evolvedpokemon.expYield;
             evolvelevel = evolvedpokemon.evolvelevel;
             LearnedMoves = evolvedpokemon.LearnedMoves;
-            Console.WriteLine($"Congratulations! Your {priorName} evolved into {pokeName}");
+            EvolutionStages = evolvedpokemon.EvolutionStages;
+            Console.WriteLine($"Congratulations! Your {priorName} evolved into {PokeName}");
         }
 
         //EXP System
@@ -206,21 +213,21 @@ namespace PokemonGame
 
             expGained = ((pokemon.expYield * pokemon.pokelevel) / 7) * 1.5;
             this.totalExp += (int)expGained;
-            Console.WriteLine($"{pokeName} gained {(int)expGained} Exp.");
+            Console.WriteLine($"{PokeName} gained {(int)expGained} Exp.");
 
             double expToLevel = Math.Floor(Math.Cbrt(this.totalExp));
             pokelevel = (int)expToLevel;
+
+            //Level Up
             if (priorlevel < pokelevel)
             {
-                Console.WriteLine($"{pokeName} leveled up to Lv.{pokelevel}!");
-                if (canEvolve() == true)
+                Console.WriteLine($"{PokeName} leveled up to Lv.{pokelevel}!");
+                if (CanEvolve == true)
                 {
                     Evolve(EvolutionStages[0]);
                 }
             }
         }
-
-
 
         //Show All Pokemon
         public static void ShowAllPokemon()
@@ -228,10 +235,11 @@ namespace PokemonGame
             Console.WriteLine("\nList of all Pokemon: ");
             foreach (var item in AllPokemon)
             {
-                Console.WriteLine(item.pokeName);
+                Console.WriteLine(item.PokeName);
             }
             Console.WriteLine();
         }
+
 
 
 
@@ -279,7 +287,7 @@ namespace PokemonGame
             EvolutionStages = { Meganium },
             LearnedMoves = { Move.EnergyBall, Move.Stomp }
         };
-        public static Pokemon Chikorita = new Pokemon("Chikorita", 45, 209, 65, 49, 65, 49, Types.Grass, Types.none, 64, 16)
+        public static Pokemon Chikorita = new Pokemon("Chikorita", 45, 209, 65, 49, 65, 10, Types.Grass, Types.none, 64, 16)
         {
             EvolutionStages = { Bayleef, Meganium },
             LearnedMoves = { Move.RazorLeaf, Move.Tackle }
@@ -379,10 +387,12 @@ namespace PokemonGame
         };
         public static Pokemon Frogadier = new Pokemon("Frogadier", 54, 63, 52, 83, 56, 97, Types.Water, Types.Dark, 142, 36)
         {
+            EvolutionStages = { Greninja },
             LearnedMoves = { Move.WaterPulse, Move.QuickAttack }
         };
         public static Pokemon Froakie = new Pokemon("Froakie", 41, 56, 40, 62, 44, 71, Types.Water, Types.Dark, 63, 16)
         {
+            EvolutionStages = { Frogadier, Greninja },
             LearnedMoves = { Move.WaterGun, Move.Pound }
         };
         //Magikarp Line
@@ -400,7 +410,7 @@ namespace PokemonGame
         // Electric Type Pokemon
 
         //Pikachu Line
-        public static Pokemon Pikachu = new Pokemon("Pikachu", 50, 70, 40, 70, 40, 100, Types.Electric, Types.none, 82, 0)
+        public static Pokemon Pikachu = new Pokemon("Pikachu", 60, 70, 40, 70, 40, 100, Types.Electric, Types.none, 82, 0)
         {
             LearnedMoves = { Move.Thunderbolt, Move.Spark, Move.QuickAttack, Move.Slam }
         };
@@ -417,7 +427,7 @@ namespace PokemonGame
         public static Pokemon Shinx = new Pokemon("Shinx", 45, 65, 34, 40, 34, 45, Types.Electric, Types.none, 60, 15)
         {
             EvolutionStages = { Luxio, Luxray },
-            LearnedMoves = { Move.Spark, Move.Tackle}
+            LearnedMoves = { Move.Spark, Move.Tackle }
         };
 
 
