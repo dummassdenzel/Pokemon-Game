@@ -8,35 +8,22 @@ namespace PokemonGame
 
         public static List<Pokemon> ActivePokemon = new List<Pokemon>();
         public static List<Trainer> BattlingTrainers = new List<Trainer>();
+
         public static void PokemonBattle()
         {
-            //Print Team of Both Players
-            foreach (var trainers in BattlingTrainers)
-            {
-                Console.WriteLine($"{trainers.trainerName}'s Team: ");
-                foreach (var pokemon in trainers.Team)
-                {
-                    if (pokemon.combathp <= 0)
-                    {
-                        Console.WriteLine($"{pokemon.PokeName} - *Knocked Out*");
-                    }
-                    else
-                    {
-                        Console.WriteLine($"{pokemon.PokeName} - HP: {pokemon.combathp}/{pokemon.hp}");
-                    }
-                }
-            }
-            Console.WriteLine("---------------------------------------------------------------------------");
+            //Print Team of Both Players            
+            PrepareForBattle();
+            Miscellaneous.Line();
 
-            
             //"Trainers sent out their Pokemon!"  
             foreach (var trainer in BattlingTrainers)
             {
                 Console.WriteLine($"{trainer.trainerName} sent out {trainer.battlingTeam[0].PokeName}!");
             }
-            Console.WriteLine("---------------------------------------------------------------------------");                     
+            Console.WriteLine("---------------------------------------------------------------------------");
             ActivePokemon.Add(BattlingTrainers[0].battlingTeam[0]);
             ActivePokemon.Add(BattlingTrainers[1].battlingTeam[0]);
+
 
 
 
@@ -44,8 +31,7 @@ namespace PokemonGame
             bool BattleOngoing = true;
             while (BattleOngoing == true)
             {
-                
-                //First Move
+
                 ActivePokemon = ActivePokemon.OrderByDescending(pokemon => pokemon.speed).ToList();
 
                 //Initiate Move Selection              
@@ -54,8 +40,9 @@ namespace PokemonGame
                 {
                     HPUpdate();
                     Console.WriteLine($"\n*{ActivePokemon[0].PokeName}'s Turn*");
-                    ShowMoves();    
+                    ShowMoves();
                     ActivePokemon[0].Attack(ActivePokemon[1]);
+
 
                     //Enemy Defeated?
                     if (ActivePokemon[1].combathp < 1)
@@ -84,10 +71,12 @@ namespace PokemonGame
                     EndTurn();
                 }
 
+
                 if (BattleOngoing == true)
                 {
                     continue;
                 }
+
                 else
                 {
                     //Victory Statement                    
@@ -124,6 +113,10 @@ namespace PokemonGame
             }
         }
 
+
+
+
+
         //Turn-Based Battle System
         public static void EndTurn()
         {
@@ -156,7 +149,25 @@ namespace PokemonGame
             Console.WriteLine("---------------------------------------------------------------------------");
         }
 
-
+        public static void PrepareForBattle()
+        {
+            foreach (var trainers in BattlingTrainers)
+            {
+                Console.WriteLine($"{trainers.trainerName}'s Team: ");
+                foreach (var pokemon in trainers.Team)
+                {
+                    if (pokemon.combathp <= 0)
+                    {
+                        Console.WriteLine($"{pokemon.PokeName} - *Knocked Out*");
+                    }
+                    else
+                    {
+                        Console.WriteLine($"{pokemon.PokeName} - HP: {pokemon.combathp}/{pokemon.hp}");
+                    }
+                }
+            }
+            Console.WriteLine("---------------------------------------------------------------------------");
+        }
 
 
 

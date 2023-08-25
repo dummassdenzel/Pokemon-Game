@@ -7,7 +7,7 @@ namespace PokemonGame
         {
             isPlayer = false;
         }
-        private void AddNPPokemon(Pokemon pokemon, int level)
+        private void SetTeam(Pokemon pokemon, int level)
         {   
             Pokemon newPokemon = new Pokemon(
                 pokemon.PokeName,
@@ -42,29 +42,29 @@ namespace PokemonGame
             public static NPTrainer Alex = new NPTrainer("Alex", 'f');
             public static NPTrainer Galino = new NPTrainer("Galino", 'm');
             public static NPTrainer Agasa = new NPTrainer("Agasa", 'f');
-            public static NPTrainer Hizola = new NPTrainer("Hizola", 'm');
             public static NPTrainer Triumfante = new NPTrainer("Triumfante", 'm');
             public static NPTrainer Roa = new NPTrainer("Roa", 'm');
 
+
+            
             static NPTrainer() //Set their Pokemon
             {
-                Steve.AddNPPokemon(Pokemon.Squirtle, 5);
-                Steve.AddNPPokemon(Pokemon.Froakie, 5);
-
-                Alex.AddNPPokemon(Pokemon.Starly, 4);
-                Alex.AddNPPokemon(Pokemon.Starly, 5);
-                Alex.AddNPPokemon(Pokemon.Starly, 5);
-
-                Galino.AddNPPokemon(Pokemon.Gible, 7);
-
-                Agasa.AddNPPokemon(Pokemon.Mudkip, 7);
-                Agasa.AddNPPokemon(Pokemon.Zorua, 8);
-
-                Triumfante.AddNPPokemon(Pokemon.Growlithe, 8);
-                Triumfante.AddNPPokemon(Pokemon.Shinx, 9);
-
-                Roa.AddNPPokemon(Pokemon.Froakie, 12);
-                Roa.AddNPPokemon(Pokemon.Kadabra, 16);
+                Steve.SetTeam(Pokemon.Squirtle, 5);
+                Steve.SetTeam(Pokemon.Froakie, 5);                
+                Alex.SetTeam(Pokemon.Starly, 4);
+                Alex.SetTeam(Pokemon.Starly, 5);
+                Alex.SetTeam(Pokemon.Starly, 5);
+                
+                Galino.SetTeam(Pokemon.Gible, 7);
+                                
+                Agasa.SetTeam(Pokemon.Mudkip, 7);
+                Agasa.SetTeam(Pokemon.Zorua, 8);
+                           
+                Triumfante.SetTeam(Pokemon.Growlithe, 8);
+                Triumfante.SetTeam(Pokemon.Shinx, 9);
+                
+                Roa.SetTeam(Pokemon.Froakie, 12);
+                Roa.SetTeam(Pokemon.Kadabra, 16);
             }
         }
 
@@ -85,14 +85,14 @@ namespace PokemonGame
 
             static GymLeader() //Set their Pokemon
             {
-                Hizola.AddNPPokemon(Pokemon.Machop, 14);
-                Hizola.AddNPPokemon(Pokemon.Machop, 14);
-                Hizola.AddNPPokemon(Pokemon.Riolu, 17);
+                Hizola.SetTeam(Pokemon.Machop, 14);
+                Hizola.SetTeam(Pokemon.Machop, 14);
+                Hizola.SetTeam(Pokemon.Riolu, 17);
 
 
-                Viacrusis.AddNPPokemon(Pokemon.Squirtle, 18);
-                Viacrusis.AddNPPokemon(Pokemon.Frogadier, 20);
-                Viacrusis.AddNPPokemon(Pokemon.Marshtomp, 22);
+                Viacrusis.SetTeam(Pokemon.Squirtle, 18);
+                Viacrusis.SetTeam(Pokemon.Frogadier, 20);
+                Viacrusis.SetTeam(Pokemon.Marshtomp, 22);
 
             }
         }

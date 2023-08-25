@@ -3,7 +3,7 @@ namespace PokemonGame
 {
 
     public class Trainer
-    {
+    {   
         public string trainerName;
         public char gender;
         public List<Pokemon> Team = new List<Pokemon>();
@@ -13,7 +13,7 @@ namespace PokemonGame
         {
             get
             {
-                if (Team.All(pokemon => pokemon.combathp == 0))
+                if (battlingTeam.All(pokemon => pokemon.combathp == 0))
                 {
                     return true;
                 }
@@ -141,11 +141,12 @@ namespace PokemonGame
             Console.WriteLine();
         }
 
-
+        
 
         //Challenge a Trainer (kinda proud of this one)
         public void Challenge()
-        {
+        {   
+            
             foreach (var pokemon in Team)
             {
                 if (pokemon.combathp > 0)
@@ -153,20 +154,23 @@ namespace PokemonGame
                     battlingTeam.Add(pokemon);
                 }
             }
+            
             if (battlingTeam.Any())
             {
                 bool playerExists = false;
                 while (playerExists == false)
-                {
+                {   
                     Console.Write($"{trainerName} - Enter a Trainer to duel with: ");
                     string? duelledTrainer = Console.ReadLine();
 
                     //Checks if the specified player exists
                     for (int i = 0; i < Trainers.Count; i++)
-                    {
+                    {   
+                        
                         if (Trainers[i].trainerName.ToLower() == duelledTrainer?.ToLower() &&
                             duelledTrainer.ToLower() != trainerName.ToLower())
-                        {
+                        {   
+                            
                             playerExists = true;
                             foreach (var pokemon in Trainers[i].Team)
                             {
@@ -175,10 +179,11 @@ namespace PokemonGame
                                     Trainers[i].battlingTeam.Add(pokemon);
                                 }
                             }
+                            
                             if (Trainers[i].battlingTeam.Any())
-                            {
+                            {   
                                 Console.Beep();
-                                Console.Clear();
+                                Console.Clear();                                
                                 Battle.BattlingTrainers.Add(this);
                                 Battle.BattlingTrainers.Add(Trainers[i]);
                                 Console.WriteLine("\n---------------------------------------------------------------------------");
