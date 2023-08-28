@@ -433,7 +433,7 @@ namespace PokemonGame
         // Electric Type Pokemon
 
         //Pikachu Line
-        public static Pokemon Pikachu = new Pokemon("Pikachu", 60, 70, 40, 70, 40, 100, Types.Electric, Types.none, 82, 0)
+        public static Pokemon Pikachu = new Pokemon("Pikachu", 60, 70, 60, 100, 60, 100, Types.Electric, Types.none, 82, 0)
         {
             LearnedMoves = { Move.Thunderbolt, Move.Spark, Move.QuickAttack, Move.Slam }
         };

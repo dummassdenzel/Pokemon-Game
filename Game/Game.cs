@@ -49,12 +49,12 @@ namespace PokemonGame
 
                     if (showmenu)
                     {
-                        showAllActions();
+                        GameF.showAllActions();
                     }
                     showmenu = true;
                     Console.WriteLine("---------------------------------------------------------------------------");
                     Console.Write($"What do you want to do, {currentPlayer[0].trainerName}?: ");
-                    
+
                     string? whatDoYouWannaDo = Console.ReadLine();
                     switch (whatDoYouWannaDo?.ToLower())
                     {
@@ -114,7 +114,7 @@ namespace PokemonGame
 
                         //Shows all possible actions
                         case "h":
-                            showAllActions();
+                            GameF.showAllActions();
                             showmenu = false;
                             continue;
 
@@ -142,7 +142,7 @@ namespace PokemonGame
                 }
             }
             Console.WriteLine("Press any key to finish the game.");
-            Console.ReadKey();
+            GameF.PressAnyKeyToContinue();
         }
 
         //CHARACTER CUSTOMIZATION: Gender*
@@ -297,6 +297,11 @@ namespace PokemonGame
         //Start your Journey
         public static void StartJourney()
         {
+            GameF.Line();
+            Console.WriteLine("Press any key to Start your journey...");
+            GameF.Line();
+            GameF.PressAnyKeyToContinue();
+            
             Trainer Denzel = new Trainer("Denzel", 'm');
             Trainer Adrian = new Trainer("Adrian", 'm');
             Trainer Dominic = new Trainer("Dominic", 'm');
@@ -305,38 +310,81 @@ namespace PokemonGame
             Trainer Iverson = new Trainer("Iverson", 'm');
             Trainer AJ = new Trainer("AJ", 'm');
             Console.Clear();
-            Console.WriteLine("---------------------------------------------------------------------------");
-            Console.WriteLine("Press any key to Start your journey...");
-            Console.WriteLine("---------------------------------------------------------------------------");
-            Console.ReadKey();
-            Console.Beep();
-            Console.Clear();
-            Console.WriteLine("---------------------------------------------------------------------------");
+
+            GameF.Line();
             Console.WriteLine("Professor Eugene:  Welcome to the world of Pokemon!");
-            Console.WriteLine("---------------------------------------------------------------------------");
+            GameF.Line();
             Console.WriteLine("Professor Eugene:  You can start by capturing Pokemon to accompany you on your journey,\n they will serve as your partners as you embark on the path of greatness.");
-            Console.WriteLine("---------------------------------------------------------------------------");
+            GameF.Line();
             Console.WriteLine("Professor Eugene:  Goodluck!");
-            Console.WriteLine("---------------------------------------------------------------------------\n");
-            Console.WriteLine("Press any key to continue...");
-            Console.ReadKey();
-            Console.Clear();
-            Console.Beep();
+            GameF.Line();
+            
+            Console.WriteLine("\nPress any key to continue...");
+            GameF.PressAnyKeyToContinue();
+            
         }
 
-        //Show All Available Actions
-        public static void showAllActions()
+        public static void Starters()
         {
-            Console.WriteLine("\nEnter the phrase or the number:");
-            Console.WriteLine("(1) - Catch a Pokemon");
-            Console.WriteLine("(2) - Challenge a Trainer ");
-            Console.WriteLine("(3) - Show Team ");
-            Console.WriteLine("(4) - Heal Pokemon ");
-            Console.WriteLine("(5) - Show All Pokemon ");
-            Console.WriteLine("(6) - Show All Trainers ");
-            Console.WriteLine("(7) - Switch to a Different Trainer ");
-            Console.WriteLine("(8) - End Game ");
-            Console.WriteLine("*Enter 'none' if you wish to go back to choosing an Action.*\n");
+            // Console.WriteLine("Professor Eugene: To start your journey, here are 5 Starter Pokemon to accompany you in your adventure.");
+            // GameF.Line();
+            // Console.WriteLine("Professor Eugene: Inside these Pokeballs reside strong and unique Pokemon.");
+            // GameF.Line();
+            // Console.WriteLine("Professor Eugene: Choose wisely...");
+            // GameF.Line();
+
+            Console.WriteLine("Choose among these 5 Pokemon to begin your journey! ");
+            Console.WriteLine("(1) - Charmander");
+            Console.WriteLine("(2) - Chikorita");
+            Console.WriteLine("(3) - Mudkip");
+            Console.WriteLine("(4) - Aron");
+            Console.WriteLine("(5) - Pikachu");
+
+            Console.Write($"Who do you wish to have, {currentPlayer[0].trainerName}?: ");
+
+            string? whatDoYouWannaDo = Console.ReadLine();
+            switch (whatDoYouWannaDo?.ToLower())
+            {
+                case "1" or "charmander":
+                ReceivePokemon(Pokemon.Charmander, 5);
+                break;
+                case "2" or "chikorita":
+                ReceivePokemon(Pokemon.Chikorita, 5);
+                break;
+                case "3" or "mudkip":
+                ReceivePokemon(Pokemon.Mudkip, 5);
+                break;
+                case "4" or "aron":
+                ReceivePokemon(Pokemon.Aron, 5);
+                break;
+                case "5" or "Pikachu":
+                ReceivePokemon(Pokemon.Pikachu, 5);
+                break;
+            }
+        }
+
+        public static void ReceivePokemon(Pokemon pokemon, int level){
+            Pokemon newPokemon = new Pokemon(
+                pokemon.PokeName,
+                pokemon.hp,
+                pokemon.atk,
+                pokemon.def,
+                pokemon.spatk,
+                pokemon.spdef,
+                pokemon.speed,
+                pokemon.poketype1,
+                pokemon.poketype2,
+                pokemon.expYield,
+                pokemon.evolvelevel
+            );
+            newPokemon.pokelevel = level;
+            newPokemon.LearnedMoves.AddRange(pokemon.LearnedMoves);
+            newPokemon.EvolutionStages.AddRange(pokemon.EvolutionStages);
+            newPokemon.PokeID = Pokemon.pokeIDPool;
+            Pokemon.pokeIDPool++;
+            newPokemon.ownerTrainer = currentPlayer[0].trainerName;
+            currentPlayer[0].Team.Add(newPokemon);
+            Pokemon.AllPokemon.Remove(newPokemon);
         }
 
         public static void ShowAllTrainers()

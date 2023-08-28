@@ -13,14 +13,14 @@ namespace PokemonGame
         {
             //Print Team of Both Players            
             PrepareForBattle();
-            Misc.Line();
+            GameF.Line();
 
             //"Trainers sent out their Pokemon!"  
             foreach (var trainer in BattlingTrainers)
             {
                 Console.WriteLine($"{trainer.trainerName} sent out {trainer.battlingTeam[0].PokeName}!");
             }
-            Misc.Line();
+            GameF.Line();
             ActivePokemon.Add(BattlingTrainers[0].battlingTeam[0]);
             ActivePokemon.Add(BattlingTrainers[1].battlingTeam[0]);
 
@@ -56,9 +56,9 @@ namespace PokemonGame
                         if (trainer?.battlingTeam?.Count > 0)
                         {
                             ActivePokemon[1] = trainer.battlingTeam[0];
-                            Misc.Line();
+                            GameF.Line();
                             Console.WriteLine($"{ActivePokemon[1].ownerTrainer} switched out {trainer.battlingTeam[0].PokeName}");
-                            Misc.Line();
+                            GameF.Line();
                             break;
                         }
                         else if (trainer?.battlingTeam.Count == 0)
@@ -80,11 +80,11 @@ namespace PokemonGame
                 else
                 {
                     //Victory Statement                    
-                    Misc.Line();
+                    GameF.Line();
                     Console.WriteLine($"{ActivePokemon[0].ownerTrainer} has won the battle!");
-                    Misc.Line();
+                    GameF.Line();
                     Console.WriteLine($"The duel between {BattlingTrainers[0].trainerName} and {BattlingTrainers[1].trainerName} has concluded");
-                    Misc.Line();
+                    GameF.Line();
                 }
 
                 //Reset NPTrainers
@@ -128,11 +128,11 @@ namespace PokemonGame
         //Displays current HP of Battling Pokemon
         public static void HPUpdate()
         {
-            Misc.Line();
+            GameF.Line();
             foreach (var pokemon in ActivePokemon)
             {
                 Console.WriteLine($"[Lv. {pokemon.pokelevel}] {pokemon.PokeName} HP: {pokemon.combathp}");
-                Misc.Line();
+                GameF.Line();
             }
             Console.Beep();
         }
@@ -140,13 +140,13 @@ namespace PokemonGame
         //Displays all possible moves of the current Active Pokemon
         public static void ShowMoves()
         {
-            Misc.Line();
+            GameF.Line();
             Console.WriteLine($"{ActivePokemon[0].PokeName}'s Moves: ");
             foreach (var moves in ActivePokemon[0].LearnedMoves)
             {
                 Console.WriteLine(moves.moveName);
             }
-            Misc.Line();
+            GameF.Line();
         }
 
         public static void PrepareForBattle()
@@ -166,7 +166,7 @@ namespace PokemonGame
                     }
                 }
             }
-            Misc.Line();
+            GameF.Line();
         }
 
 

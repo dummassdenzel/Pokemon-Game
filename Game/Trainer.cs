@@ -62,15 +62,16 @@ namespace PokemonGame
                 pokemon.evolvelevel
             );
             newPokemon.LearnedMoves.AddRange(pokemon.LearnedMoves);
-            Team.Add(newPokemon);
-            newPokemon.ownerTrainer = this.trainerName;
+            newPokemon.EvolutionStages.AddRange(pokemon.EvolutionStages);
             newPokemon.PokeID = Pokemon.pokeIDPool;
             Pokemon.pokeIDPool++;
+            newPokemon.ownerTrainer = this.trainerName;
+            Team.Add(newPokemon);
+            Pokemon.AllPokemon.Remove(newPokemon);
 
             Console.Clear();
             Console.WriteLine($"Congratulations {trainerName}, you've successfully caught {newPokemon.PokeName}[Lv.{newPokemon.pokelevel}].");
             Console.WriteLine($"Its stats are: HP:{newPokemon.hp} Attack:{newPokemon.atk} Def:{newPokemon.def} Speed:{newPokemon.speed}\n");
-            Pokemon.AllPokemon.Remove(newPokemon);
 
         }
 

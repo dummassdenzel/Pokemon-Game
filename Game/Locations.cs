@@ -4,7 +4,8 @@ namespace PokemonGame{
 
         public string LocationName;
         public string Region;
-        public List<Pokemon> Inhabitants = new List<Pokemon>();
+        public List<People> Peoples = new List<People>();
+        public List<Pokemon> Pokemons = new List<Pokemon>();
         public List<Locations> AvailableRoutes = new List<Locations>();
         
 
@@ -18,7 +19,9 @@ namespace PokemonGame{
         public void AddInhabitant(Pokemon pokemon, int pokemonlevel){
             Pokemon newPokemon = pokemon;
             newPokemon.pokelevel = pokemonlevel;
-            Inhabitants.Add(newPokemon);
+            Pokemons.Add(newPokemon);
         }
+
+        
     }
 }
