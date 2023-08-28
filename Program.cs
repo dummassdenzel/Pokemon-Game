@@ -9,10 +9,7 @@ public class ActualGame
     {      
         Console.Beep();
         Game.StartJourney();               
-        Game.CustomTrainerCreation();  
-        foreach(var item in Pokemon.PokeDex){
-            Console.WriteLine(item.PokeName);
-        }      
+        Game.CustomTrainerCreation();     
         Console.Beep();
         Game.StartGame();
         

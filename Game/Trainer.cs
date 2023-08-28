@@ -9,6 +9,7 @@ namespace PokemonGame
         public List<Pokemon> Team = new List<Pokemon>();
         public List<Pokemon> battlingTeam = new List<Pokemon>();
         public bool isPlayer;
+        public List<Locations> CurrentLocation = new List<Locations>();
         public bool HasNoElligiblePokemon
         {
             get
